@@ -1,4 +1,4 @@
-export default function admin() {
+export default function Admin() {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gray-900">
         {/* Blue background layer */}
