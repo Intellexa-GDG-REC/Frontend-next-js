@@ -1,3 +1,5 @@
+import Detail from "../component/detail";
+
 export default function Home() {
     return (
       <main className="h-screen-full w-screen bg-gradient-to-l  from-gray-900 via-black to-gray-900  p-5 text-white bg-animate-pulse">
@@ -27,7 +29,6 @@ export default function Home() {
                 <div className='bg-white w-[300px] p-4 mt-10 mx-auto text-[22px] font-bold rounded-lg  text-black' >Begin Your Adventure</div>
             </div>
             {/* Hero End */}
-            {/* Overview Start */}
             <div className='mt-[150px]'>
                 <div className='text-white  text-center '>
                     <div className='font-bold text-[20px] text-purple-700'>
@@ -40,42 +41,11 @@ export default function Home() {
                         Everything here to write
                     </div>
                 </div>
-                <div className='flex mt-20 pr-[10%] pl-[10%]'>
-                    <div className='bg-gray-400 w-1/2 h-[300px] rounded-md'>
-                    </div>
-                    <div className='w-1/2 h-[300px] text-white text-justify ms-10'>
-                        <div className='text-[40px] font-bold'>Title name</div>
-                        <div className='font-thin text-[20px]'>Are you planning on buying a new car? Well, we know that with so many car options available out there,</div>
-                    </div>
-                </div>
-                <div className='flex mt-20 pr-[10%] pl-[10%]'>
-
-                    <div className='w-1/2 h-[300px] text-white text-justify me-10'>
-                        <div className='text-[40px] font-bold'>Title name</div>
-                        <div className='font-thin text-[20px]'>Are you planning on buying a new car? Well, we know that with so many car options available out there,</div>
-                    </div>
-                    <div className='bg-gray-400 w-1/2 h-[300px] rounded-md'>
-                    </div>
-                </div>
-                <div className='flex mt-20 pr-[10%] pl-[10%]'>
-                    <div className='bg-gray-400 w-1/2 h-[300px] rounded-md'>
-                    </div>
-                    <div className='w-1/2 h-[300px] text-white text-justify ms-10'>
-                        <div className='text-[40px] font-bold'>Title name</div>
-                        <div className='font-thin text-[20px]'>Are you planning on buying a new car? Well, we know that with so many car options available out there,</div>
-                    </div>
-                </div>
-                <div className='flex mt-20 pr-[10%] pl-[10%]'>
-
-                    <div className='w-1/2 h-[300px] text-white text-justify me-10'>
-                        <div className='text-[40px] font-bold'>Title name</div>
-                        <div className='font-thin text-[20px]'>Are you planning on buying a new car? Well, we know that with so many car options available out there,</div>
-                    </div>
-                    <div className='bg-gray-400 w-1/2 h-[300px] rounded-md'>
-                    </div>
-                </div>
+            <Detail title={"dfgdfg"} dis={"dsfsdfsd"} isleft={true} imageurl={"https://img.freepik.com/premium-photo/south-indian-girl-hoodie-shirt_905085-77.jpg"}/>
+            <Detail title={"dfgdfg"} dis={"dsfsdfsd"} isleft={false} imageurl={"https://img.freepik.com/premium-photo/south-indian-girl-hoodie-shirt_905085-77.jpg"}/>
+            
             </div>
-            {/* Overview End */}
+          
             {/* Footer Start */}
             <div className='h-[200px]  '>
                 <div className='text-white end-0 pt-20 text-center text-[25px] font-bold'>Project Name</div>
