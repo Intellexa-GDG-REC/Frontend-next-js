@@ -1,5 +1,16 @@
+"use client" ;
 import Image from 'next/image'
+//import { loadEnvConfig } from '@next/env';
+import Link from 'next/link';
+import React from 'react';
+
+
 export default function Login() {
+ // const projectDir = process.cwd(); // Path to the project root
+  //loadEnvConfig(projectDir);
+    const [isLoading, setLoading] = React.useState(false);
+  const loginbaseurl = process.env.BASE_PUBLIC_API_URL || '/auth/github/' ;
+  console.log(`Secret Key: ${loginbaseurl+"/auth/github/"}`);
     return (
       <main className="flex items-center justify-center p-2 h-screen w-screen animated-background h-screen bg-gradient-to-r from-white via-gray-500 to-blue-500">
       <div className="" >
@@ -42,7 +53,10 @@ export default function Login() {
           <h1 className="text-center text-black text-2xl font-bold mb-4">Login</h1>
   
           {/* Login Button */}
-          <button className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition">
+          <button className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition" >
+            <Link  href={loginbaseurl+"/auth/github/"}
+            passHref>
+           
             <span className="flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -54,9 +68,14 @@ export default function Login() {
               </svg>
               Login with GitHub
             </span>
+            </Link>
           </button>
         </div>
       </main>
     );
   }
+
+function defineConfig(arg0: { dbCredentials: { connectionString: string; }; }) {
+  throw new Error('Function not implemented.');
+}
   
