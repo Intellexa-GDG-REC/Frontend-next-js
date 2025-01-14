@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { Gradient } from "@/components/gradient";
 import { Timeline } from "@/components/timeline";
 import { Prize } from "@/components/prizes";
+
 export default function Home() {
     return (
         <div className="max-w-screen-2xl overflow-x-hidden text-white relative">
@@ -19,6 +20,5 @@ export default function Home() {
             <Prize />
             <Footer />
         </div>
-
     );
 }
