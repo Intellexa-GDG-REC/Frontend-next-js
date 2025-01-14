@@ -48,7 +48,7 @@ export default function Home() {
           
             {/* Footer Start */}
             <div className='h-[200px]  '>
-                <div className='text-white end-0 pt-20 text-center text-[25px] font-bold'>Project Name</div>
+                <div className='text-white end-0 pt-20 text-center text-[25px] font-bold'>GitRecQuest v.1.0.0 @ REC</div>
             <div className='text-white text-center end-0 mt-2 text-[15px] opacity-70'>Made With 💖</div>
             </div>
             {/* Footer End */}
