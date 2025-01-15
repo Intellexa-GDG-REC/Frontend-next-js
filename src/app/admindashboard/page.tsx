@@ -1,6 +1,6 @@
-"use client"
-import React, { useState, useEffect } from "react";
-
+"use client";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 type Contribution = {
   project: string;
   url: string;
@@ -22,7 +22,8 @@ const AdminDashboard: React.FC = () => {
   const [filteredUsers, setFilteredUsers] = useState<UserStats[]>([]);
   const [selectedUser, setSelectedUser] = useState<UserStats | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [hasCookie, setHasCookie] = useState(false);
+  const router = useRouter();
   // Fetch users from API
   /*
   useEffect(() => {
@@ -34,6 +35,25 @@ const AdminDashboard: React.FC = () => {
     };
     fetchUsers();
   }, []);*/
+
+ 
+  useEffect(() => {
+    const checkCookie = () => {
+      // Use document.cookie to check for the cookie
+      const allCookies = document.cookie;
+      setHasCookie(allCookies.includes("adminauth"));
+      //console.log(hasCookie)
+      if (!hasCookie) {
+        // Redirect to the login page if not authenticated
+        router.push("/admin");
+      }
+
+
+    };
+
+    checkCookie();
+  }, []);
+
 
 // Use static data instead of fetch
 

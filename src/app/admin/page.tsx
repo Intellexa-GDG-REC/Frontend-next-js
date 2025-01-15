@@ -7,6 +7,11 @@ export default function Admin() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+
+
+
+
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent page reload
     setError(null); // Clear previous errors
@@ -33,7 +38,7 @@ export default function Admin() {
       
       const data = await response.json();
       console.log(`Login successful! Token: ${data.token}`);
-      // You can redirect the user or store the token in localStorage/sessionStorage here.
+      
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred");
     } finally {
