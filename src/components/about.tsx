@@ -16,10 +16,10 @@ export const About = () => {
     }
 
     return (
-        <div className="lg:px-[8%] flex space-x-48 h-screen items-center">
-            <div className="w-1/2 p-6">
+        <div className="lg:px-[8%] md:flex md:space-x-48 h-screen md:items-center">
+            <div className="md:w-1/2 p-6 text-center md:text-left">
                 <motion.span
-                    className="inline-block bg-green-500 text-black text-5xl px-6 py-5"
+                    className="text-nowrap inline-block bg-green-500 text-black md:text-5xl text-3xl px-6 py-5"
                     variants={variant}
                     initial="initial"
                     whileInView="animate"
