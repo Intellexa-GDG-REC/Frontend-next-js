@@ -9,9 +9,9 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent page reload
-    setError(null); // Clear previous errors
-    setLoading(true); // Show loading state
+    e.preventDefault(); 
+    setError(null); 
+    setLoading(true); 
   
     try {
       const response = await fetch("http://localhost:8080/admin/login", {
@@ -19,11 +19,11 @@ export default function Admin() {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Include cookies in the request
+        credentials: "include",
         body: JSON.stringify({ username: email, password }),
       });
   
-      // Handle specific status codes
+     
       if (response.status === 406) {
         const data = await response.json();
         throw new Error(data.message || "Invalid credentials");
@@ -47,7 +47,7 @@ export default function Admin() {
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred");
     } finally {
-      setLoading(false); // Hide loading state
+      setLoading(false); 
     }
   };
   

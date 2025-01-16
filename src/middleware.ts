@@ -11,7 +11,6 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/admin") {
     console.log("Admin page accessed");
 
-    // Uncomment and add logic as needed
     // if (!hasAdminCookie) {
     //   return NextResponse.redirect(new URL("/login", request.url));
     // }
