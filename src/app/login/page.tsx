@@ -1,8 +1,5 @@
 "use client" ;
 import Image from 'next/image'
-import { NextApiRequest, NextApiResponse } from "next";
-//import { loadEnvConfig } from '@next/env';
-import Link from 'next/link';
 import React from 'react';
 
 

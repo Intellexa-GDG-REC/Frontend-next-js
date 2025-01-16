@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 type Contribution = {
@@ -15,6 +16,8 @@ type UserStats = {
   contributions: Contribution[];
 };
 
+
+
 const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<UserStats[]>([]);
   const [activeTab, setActiveTab] = useState<"users" | "contributions">("users");
@@ -22,8 +25,7 @@ const AdminDashboard: React.FC = () => {
   const [filteredUsers, setFilteredUsers] = useState<UserStats[]>([]);
   const [selectedUser, setSelectedUser] = useState<UserStats | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hasCookie, setHasCookie] = useState(false);
-  const router = useRouter();
+const router = useRouter();
   // Fetch users from API
   /*
   useEffect(() => {
@@ -37,22 +39,7 @@ const AdminDashboard: React.FC = () => {
   }, []);*/
 
  
-  useEffect(() => {
-    const checkCookie = () => {
-      // Use document.cookie to check for the cookie
-      const allCookies = document.cookie;
-      setHasCookie(allCookies.includes("adminauth"));
-      //console.log(hasCookie)
-      if (!hasCookie) {
-        // Redirect to the login page if not authenticated
-        router.push("/admin");
-      }
-
-
-    };
-
-    checkCookie();
-  }, []);
+ 
 
 
 // Use static data instead of fetch
@@ -168,6 +155,29 @@ useEffect(() => {
     handleEdit("contributions", updatedContributions);
   };
   
+const handlelogout = async ()=>{
+  if (window.confirm(`Are you sure you want to logout?`)) {
+    await fetch(`http://localhost:8080/admin/logout`, {
+      method: "POST",
+    });
+    clearAllCookies();
+    
+     router.replace("/admin")
+      
+    
+
+  }
+}
+const clearAllCookies = () => {
+  const allCookies = document.cookie.split(";");
+
+  allCookies.forEach((cookie) => {
+    const cookieName = cookie.split("=")[0].trim();
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  });
+
+ // console.log("All cookies cleared!");
+};
   // Render users or contributions based on active tab
   const renderContent = () => {
     if (activeTab === "users") {
@@ -358,6 +368,7 @@ useEffect(() => {
     <div className="min-h-screen bg-gray-900 p-8">
       <header className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold text-gray-100">Admin Dashboard</h1>
+        <button onClick={handlelogout} className="text-sm font-bold  text-white bg-blue-700 rounded-lg p-3">Logout</button>
         <input
           type="text"
           placeholder="Search..."
