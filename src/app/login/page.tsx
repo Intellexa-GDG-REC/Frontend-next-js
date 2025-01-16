@@ -10,7 +10,7 @@ export default function Login() {
     const onClickLogin = async () => {
       try {
         setLoading(true);
-        // Redirect to the API route
+       
         window.location.href = loginbaseurl+"/auth/github";
       } catch (error) {
         console.error("GitHub Login Failed:", error);

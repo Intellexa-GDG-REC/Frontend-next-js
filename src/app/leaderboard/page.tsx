@@ -14,10 +14,10 @@ type LeaderBoardItem = {
 export default function Leaderboard() {
   const [data, setData] = useState<LeaderBoardItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; // Update according to your pagination logic
+  const itemsPerPage = 3; 
   const [totalPages, setTotalPages] = useState(1);
 
-  // Fetch leaderboard data from the API
+
   const fetchData = async (pageNum: number) => {
     try {
       const response = await fetch(
@@ -25,16 +25,16 @@ export default function Leaderboard() {
       );
       const responseData = await response.json();
 
-      // Assuming API returns both data and total pages
-      setData(responseData || []); // Adjust key if API structure differs
-      setTotalPages(responseData.totalPages || 1); // Update totalPages key
+      
+      setData(responseData || []); 
+      setTotalPages(responseData.totalPages || 1); 
       //console.log(responseData.lenght())
     } catch (error) {
       console.error("Failed to fetch leaderboard data:", error);
     }
   };
 
-  // Fetch data on component mount and page change
+  
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);
