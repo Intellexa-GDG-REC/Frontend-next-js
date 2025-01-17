@@ -28,16 +28,33 @@ const AdminDashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  // Fetch users from API
+
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch("http://localhost:8080/admin/user");
-      const data = await response.json();
-      setUsers(data.users || []);  
-      setFilteredUsers(data.users || []);
+      try {
+        const response = await fetch("http://localhost:8080/admin/user", {
+          method: "GET", 
+          credentials: "include", 
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          setUsers(data.users || []);
+          setFilteredUsers(data.users || []);
+        } else {
+          console.error("Failed to fetch users. Status:", response.status);
+        }
+      } catch (error) {
+        console.error("Error while fetching users:", error);
+      }
     };
+  
     fetchUsers();
   }, []);
+  
 
 
   const handleOpenModal = (user: UserStats) => {
@@ -59,7 +76,32 @@ const AdminDashboard: React.FC = () => {
   };
 
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async (score: number,userid: number, username: string) => {
+
+    if (window.confirm(`Are you sure you want to Update Score ${username} to ${score}?`)) {
+      const response = await fetch("http://localhost:8080/admin/user/scorecount", {
+        method: "POST",
+        credentials: "include", 
+        headers: {
+          "Content-Type": "application/json",
+          
+        },
+        body: JSON.stringify({
+          Score_count: score,
+          user_id: userid
+        }),
+      });
+  
+      if (response.ok) { 
+        setUsers(users.map((user) => (user.user_id === userid ? { ...user, score: score } : user)));
+
+      } else {
+
+        console.error("Failed to update the score the user");
+      }
+    }
+
+
     if (selectedUser) {
       setUsers(users.map((user) => (user.user_id === selectedUser.user_id ? selectedUser : user)));
     }
@@ -78,26 +120,56 @@ const AdminDashboard: React.FC = () => {
 
 
   const handleDelete = async (username: string) => {
-    if (window.confirm(`Are you sure you want to delete ${username}?`)) {
-      await fetch(`http://localhost:8080/admin/user/${username}`, {
-        method: "DELETE",
-      });
-      setUsers(users.filter((user) => user.user_name !== username));
-    }
+    alert("u dnot have permission broo :) ask aksh")
+    //if (window.confirm(`Are you sure you want to delete ${username}?`)) {
+     // await fetch(`http://localhost:8080/admin/user/ban/${username}`, {
+     //   method: "POST",
+     // });
+     // setUsers(users.filter((user) => user.user_name !== username));
+   //}
   };
 
 
-  const handleBan = async (username: string) => {
-    if (window.confirm(`Are you sure you want to ban ${username}?`)) {
-      await fetch(`http://localhost:8080/admin/user/${username}/ban`, {
+  const handleBan = async (userId: number, username: string) => {
+    if (window.confirm(`Are you sure you want to delete ${username}?`)) {
+      const response = await fetch("http://localhost:8080/admin/user/ban", {
         method: "POST",
+        credentials: "include", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: userId, 
+        }),
       });
-      alert(`${username} has been banned.`);
-      setUsers(
-        users.map((user) =>
-          user.user_name === username ? { ...user, banned: true } : user
-        )
-      );
+  
+      if (response.ok) {
+        setUsers(users.map((user) => (user.user_id === userId ? { ...user, banned: true } : user)));
+
+      } else {
+        console.error("Failed to ban the user");
+      }
+    }
+  };
+  const handleunBan = async (userId: number, username: string) => {
+    if (window.confirm(`Are you sure you want to delete ${username}?`)) {
+      const response = await fetch("http://localhost:8080/admin/user/unban", {
+        method: "POST",
+        credentials: "include", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: userId, 
+        }),
+      });
+  
+      if (response.ok) {
+        setUsers(users.map((user) => (user.user_id === userId ? { ...user, banned: false } : user)));
+
+      } else {
+        console.error("Failed to ban the user");
+      }
     }
   };
 
@@ -106,6 +178,7 @@ const AdminDashboard: React.FC = () => {
     if (window.confirm(`Are you sure you want to logout?`)) {
       await fetch(`http://localhost:8080/admin/logout`, {
         method: "POST",
+        credentials: "include", 
       });
       clearAllCookies();
       router.replace("/admin");
@@ -152,7 +225,7 @@ const AdminDashboard: React.FC = () => {
               {user.banned ? (
                 <div>
                   <button
-                    onClick={() => handleBan(user.user_name)}
+                    onClick={() => handleunBan(user.user_id,user.user_name)}
                     className="bg-red-500 text-white px-4 py-2 rounded-lg mr-2"
                   >
                     UnBan
@@ -167,7 +240,7 @@ const AdminDashboard: React.FC = () => {
               ) : (
                 <div>
                   <button
-                    onClick={() => handleBan(user.user_name)}
+                    onClick={() => handleBan(user.user_id,user.user_name)}
                     className="bg-red-500 text-white px-4 py-2 rounded-lg mr-2"
                   >
                     Ban
@@ -249,7 +322,7 @@ const AdminDashboard: React.FC = () => {
               <button onClick={handleCloseModal} className="bg-gray-600 text-white px-4 py-2 rounded-lg mr-2">
                 Cancel
               </button>
-              <button onClick={handleSaveChanges} className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+              <button onClick={()=> handleSaveChanges(selectedUser.score,selectedUser.user_id,selectedUser.user_name)} className="bg-blue-500 text-white px-4 py-2 rounded-lg">
                 Save
               </button>
             </div>

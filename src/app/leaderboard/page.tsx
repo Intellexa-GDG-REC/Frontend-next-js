@@ -89,7 +89,7 @@ export default function Leaderboard() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+             {data.map((item, index) => (
                 <tr
                   key={item.user_id}
                   className="border-t border-gray-700 hover:bg-gray-700 transition"
@@ -117,6 +117,32 @@ export default function Leaderboard() {
                   <td className="px-4 py-2 text-gray-300">{item.score}</td>
                 </tr>
               ))}
+              {data.length===0?<tr
+                  key={"dsf"}
+                  className="border-t border-gray-700 hover:bg-gray-700 transition"
+                >
+                  <td className="px-4 py-2 text-gray-300">
+                    sdfsdf
+                  </td>
+                  <td className="px-4 py-2 flex items-center">
+                    <img
+                      src={ `https://img.freepik.com/premium-photo/south-indian-girl-hoodie-shirt_905085-77.jpg`}
+                    // src="https://img.freepik.com/premium-photo/south-indian-girl-hoodie-shirt_905085-77.jpg"
+                      alt={`avatar`}
+                      className="w-10 h-10 rounded-full mr-4"
+                    />
+                    <a
+                      href={"sdf"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:underline"
+                    >
+                       item.github_username
+                    </a>
+                  </td>
+                  <td className="px-4 py-2 text-gray-300">dsfdsf</td>
+                  <td className="px-4 py-2 text-gray-300">kjljkljk</td>
+                </tr>:<></>}
             </tbody>
           </table>
         </div>
