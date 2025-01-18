@@ -1,8 +1,5 @@
 "use client" ;
 import Image from 'next/image'
-import { NextApiRequest, NextApiResponse } from "next";
-//import { loadEnvConfig } from '@next/env';
-import Link from 'next/link';
 import React from 'react';
 
 
@@ -13,7 +10,7 @@ export default function Login() {
     const onClickLogin = async () => {
       try {
         setLoading(true);
-        // Redirect to the API route
+       
         window.location.href = loginbaseurl+"/auth/github";
       } catch (error) {
         console.error("GitHub Login Failed:", error);

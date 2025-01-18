@@ -1,4 +1,5 @@
 'use client'
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function Admin() {
@@ -6,40 +7,50 @@ export default function Admin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter();
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent page reload
-    setError(null); // Clear previous errors
-    setLoading(true); // Show loading state
-
+    e.preventDefault(); 
+    setError(null); 
+    setLoading(true); 
+  
     try {
       const response = await fetch("http://localhost:8080/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ username: email, password }),
       });
-      if (response.status == 406) {
+  
+     
+      if (response.status === 406) {
         const data = await response.json();
-        throw new Error(data.message || "invalid credentials");
+        throw new Error(data.message || "Invalid credentials");
       }
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.message || "Failed to login");
       }
-
-      
-      
+  
+     
+      const allCookies = document.cookie;
+      if (allCookies.includes("admin_auth_")) {
+       router.replace("/admindashboard")
+        
+      }
+  
+    
       const data = await response.json();
-      console.log(`Login successful! Token: ${data.token}`);
-      // You can redirect the user or store the token in localStorage/sessionStorage here.
+      console.log(`Server response:`, data);
+  
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred");
     } finally {
-      setLoading(false); // Hide loading state
+      setLoading(false); 
     }
   };
+  
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-900 relative">
