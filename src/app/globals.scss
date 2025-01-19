@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --color-bg2: rgb(10, 10, 10);
+  --color-bg1: rgb(21, 128, 61);
+  --color1: 10, 10, 10;
+  --color2: 10, 10, 10;
+  --color3: 10, 10, 10;
+  --color4: 10, 10, 10;
+  --color5: 10, 10, 10;
+  // --color-interactive: 140, 100, 255;
+  --circle-size: 80%;
+  --blending: hard-light;
+}
+
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('/fonts/clashGroteskVariable.ttf') format('truetype');
+  font-style: normal;
+}
