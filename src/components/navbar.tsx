@@ -47,7 +47,7 @@ export const Navbar = () => {
 
     return (
         <>
-            <div className="md:block hidden fixed w-full bg-black z-50">
+            <div className="md:block hidden fixed w-screen bg-black z-50">
                 <motion.nav 
                     className="flex justify-between py-4 border-b border-white/10 lg:px-[3%] items-center overflow-x-hidden z-10"
                     animate={{ y: 0, opacity: 1 }}
