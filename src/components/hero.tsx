@@ -20,7 +20,7 @@ export const Hero = () => {
         };
     }, []);
     return (
-        <div className="flex flex-col justify-center items-center min-h-[calc(100vh-70px)] relative">
+        <div className="flex flex-col justify-center items-center min-h-[100vh] relative">
             <motion.span className="absolute top-44 left-64 rounded-xl p-2 hidden lg:block"
                 initial={{ y: 0, opacity: 0 }}
                 animate={{
@@ -123,7 +123,7 @@ export const Hero = () => {
                     initial={{ y: -20, opacity: 0 }}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.9 }}
-                    className="mt-6 text-xl px-5 py-3 bg-green-500 text-black rounded-xl duration-200 hover:drop-shadow-[0_16px_24px_rgba(34,197,94,0.35)]">Join now
+                    className="mt-6 text-xl px-5 py-3 bg-gradient-to-b from-green-400 to-green-500 text-black rounded-xl duration-200 hover:drop-shadow-[0_16px_24px_rgba(34,197,94,0.35)]">Join now
                 </motion.button>
             </div>
         </div>

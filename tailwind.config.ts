@@ -24,6 +24,7 @@ export default {
           "radial-gradient(circle 40% at top, var(--color-bg1), var(--color-bg2))",
       },
       colors: {
+        mygreen: "#22c55e",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
