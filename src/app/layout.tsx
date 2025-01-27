@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/components/AuthProvider";
 import "./globals.scss";
+import SmoothScroller from "@/components/Lenis";
+import Header from "@/components/Header"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +31,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-clash bg-[#0a0a0a] flex justify-center overflow-x-hidden`}
       >
         <AuthProvider>
+          <SmoothScroller />
+          <Header />
           {children}
         </AuthProvider>
       </body>
