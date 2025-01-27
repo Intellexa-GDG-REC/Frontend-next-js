@@ -12,10 +12,10 @@ export function PrizeCard({title, amount, description} :{
 }) {
   return (
     <CardContainer className="inter-var">
-      <CardBody className="relative group/card hover:shadow-2xl hover:shadow-emerald-500/[0.1] bg-black border-white/[0.2] w-auto sm:w-[33rem] h-auto rounded-xl p-6 border bg-grid-white/5">
+      <CardBody className="relative group/card hover:shadow-2xl hover:shadow-emerald-500/[0.1] bg-black border-white/[0.2] w-auto md:w-[33rem] h-auto rounded-xl p-6 border bg-grid-white/5">
         <CardItem
           translateZ="50"
-          className="text-4xl font-bold text-white text-center w-full"
+          className="lg:text-4xl md:text-3xl sm:text-2xl font-bold text-white text-center w-full"
         >
           {title}
         </CardItem>

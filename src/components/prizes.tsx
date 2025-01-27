@@ -33,7 +33,7 @@ export const Prize = () => {
                     {"<Prize Pool />"}
                 </motion.h2>
             </div>
-            <div className="md:flex md:justify-evenly md:items-center">
+            <div className="lg:flex lg:justify-evenly lg:items-center">
                 <div>
                     <PrizeCard title="Top 10 Contributors💰" description="$5000 for each of the top 10 Contributors💰" amount="$5000" />
                 </div>
