@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
-import Image from 'next/image';
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, RotateCw, Trophy, Medal, Award } from "lucide-react";
 
 type LeaderBoardItem = {
   user_id: number;
@@ -11,163 +12,184 @@ type LeaderBoardItem = {
   score: number;
 };
 
-export default function Leaderboard() {
-  const [data, setData] = useState<LeaderBoardItem[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; 
-  const [totalPages, setTotalPages] = useState(1);
-
-
-  const fetchData = async (pageNum: number) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/leaderboard`
-      );
-      const responseData = await response.json();
-
-      
-      setData(responseData || []); 
-      setTotalPages(responseData.totalPages || 1); 
-      //console.log(responseData.lenght())
-    } catch (error) {
-      console.error("Failed to fetch leaderboard data:", error);
+const RankBadge = ({ rank }: { rank: number }) => {
+  const getBadgeStyle = (rank: number) => {
+    switch (rank) {
+      case 1:
+        return "bg-amber-500/20 text-amber-500 border-amber-500/50";
+      case 2:
+        return "bg-gray-300/20 text-gray-300 border-gray-300/50";
+      case 3:
+        return "bg-amber-700/20 text-amber-700 border-amber-700/50";
+      default:
+        return "bg-gray-800 text-gray-400 border-gray-700";
     }
   };
 
-  
+  const getIcon = (rank: number) => {
+    switch (rank) {
+      case 1:
+        return <Trophy className="w-4 h-4" />;
+      case 2:
+        return <Medal className="w-4 h-4" />;
+      case 3:
+        return <Award className="w-4 h-4" />;
+      default:
+        return rank;
+    }
+  };
+
+  return (
+    <div className={`flex items-center justify-center w-8 h-8 border rounded-lg ${getBadgeStyle(rank)}`}>
+      {getIcon(rank)}
+    </div>
+  );
+};
+
+export default function Leaderboard() {
+  const [data, setData] = useState<LeaderBoardItem[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const itemsPerPage = 5;
+
+  const fetchData = async (pageNum: number) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8080/leaderboard`);
+      const responseData = await response.json();
+      setData(responseData || []);
+      setTotalPages(Math.ceil(responseData.length / itemsPerPage) || 1);
+    } catch (error) {
+      console.error("Failed to fetch leaderboard data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
-    console.log("clicked")
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
-      fetchData(currentPage);
     }
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden p-5">
-      {/* Background with texture */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 bg-no-repeat bg-cover"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 30% 30%, #4084ec, transparent), radial-gradient(circle at 70% 70%, #334155, transparent)',
-          }}
-        ></div>
-      </div>
-
-      {/* Leaderboard container */}
-      <div className="relative w-full max-w-4xl bg-gray-800 shadow-md rounded-lg p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="mx-auto text-3xl font-bold text-center text-gray-100">Leaderboard</h1>
-          <button
-            onClick={() => fetchData(currentPage)}
-            className="flex items-center justify-center p-2 bg-white rounded-full hover:bg-gray-600 transition"
-          >
-            <Image
-              src={"/refresh.svg"}
-              width={15}
-              height={15}
-              alt="Refresh leaderboard"
-              className="cursor-pointer"
-            />
-          </button>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full">
-            <thead>
-              <tr className="bg-gray-700 text-gray-300">
-                <th className="px-4 py-2 text-left">Rank</th>
-                <th className="px-4 py-2 text-left">Player</th>
-                <th className="px-4 py-2 text-left">PR Count</th>
-                <th className="px-4 py-2 text-left">Score</th>
-              </tr>
-            </thead>
-            <tbody>
-             {data.map((item, index) => (
-                <tr
-                  key={item.user_id}
-                  className="border-t border-gray-700 hover:bg-gray-700 transition"
-                >
-                  <td className="px-4 py-2 text-gray-300">
-                    {(currentPage - 1) * itemsPerPage + index + 1}
-                  </td>
-                  <td className="px-4 py-2 flex items-center">
-                    <img
-                      src={ `https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}&font=montserrat`}
-                    // src="https://img.freepik.com/premium-photo/south-indian-girl-hoodie-shirt_905085-77.jpg"
-                      alt={`${item.github_username}'s avatar`}
-                      className="w-10 h-10 rounded-full mr-4"
-                    />
-                    <a
-                      href={item.github_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:underline"
-                    >
-                      {item.user_name || item.github_username}
-                    </a>
-                  </td>
-                  <td className="px-4 py-2 text-gray-300">{item.pr_count}</td>
-                  <td className="px-4 py-2 text-gray-300">{item.score}</td>
-                </tr>
-              ))}
-              {data.length===0?<tr
-                  key={"dsf"}
-                  className="border-t border-gray-700 hover:bg-gray-700 transition"
-                >
-                  <td className="px-4 py-2 text-gray-300">
-                    sdfsdf
-                  </td>
-                  <td className="px-4 py-2 flex items-center">
-                    <img
-                      src={ `https://img.freepik.com/premium-photo/south-indian-girl-hoodie-shirt_905085-77.jpg`}
-                    // src="https://img.freepik.com/premium-photo/south-indian-girl-hoodie-shirt_905085-77.jpg"
-                      alt={`avatar`}
-                      className="w-10 h-10 rounded-full mr-4"
-                    />
-                    <a
-                      href={"sdf"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:underline"
-                    >
-                       item.github_username
-                    </a>
-                  </td>
-                  <td className="px-4 py-2 text-gray-300">dsfdsf</td>
-                  <td className="px-4 py-2 text-gray-300">kjljkljk</td>
-                </tr>:<></>}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Pagination */}
-        <div className="flex justify-between items-center mt-4">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600  transition"
-          >
-            Previous
-          </button>
-          <div className="text-gray-300">
-            Page {currentPage} of {totalPages}
+    <div className="min-h-screen bg-[#0a0a0a] w-screen">
+      <motion.div 
+        className="mx-auto px-4 py-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="relative">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-2xl md:text-5xl font-bold text-white text-center w-full">
+              Leaderboard
+            </h1>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => fetchData(currentPage)}
+              className="p-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors"
+            >
+              <RotateCw className="w-5 h-5 text-gray-400" />
+            </motion.button>
           </div>
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600  transition"
-          >
-            Next
-          </button>
+
+          {/* Leaderboard Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-800">
+                  <th className="px-4 py-3 text-left text-gray-400 font-medium">Rank</th>
+                  <th className="px-4 py-3 text-left text-gray-400 font-medium">Player</th>
+                  <th className="px-4 py-3 text-left text-gray-400 font-medium">PRs</th>
+                  <th className="px-4 py-3 text-left text-gray-400 font-medium">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, index) => (
+                  <motion.tr
+                    key={item.user_id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors"
+                  >
+                    <td className="px-4 py-4">
+                      <RankBadge rank={(currentPage - 1) * itemsPerPage + index + 1} />
+                    </td>
+                    <td className="px-4 py-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="relative w-10 h-10">
+                          <img
+                            src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}&font=montserrat`}
+                            alt={`${item.github_username}'s avatar`}
+                            className="rounded-xl object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <a
+                            href={item.github_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white hover:text-blue-400 transition-colors font-medium"
+                          >
+                            {item.user_name || item.github_username}
+                          </a>
+                          <span className="text-sm text-gray-500">@{item.github_username}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-4 py-4">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-purple-500/20 text-purple-400">
+                        {item.pr_count}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4">
+                      <span className="text-gray-300 font-semibold">{item.score}</span>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="mt-6 flex items-center justify-between">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gray-800 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>Previous</span>
+            </motion.button>
+
+            <span className="text-gray-400">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gray-800 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition-colors"
+            >
+              <span>Next</span>
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
+          </div>
         </div>
-      </div>
-    </main>
+      </motion.div>
+    </div>
   );
 }
