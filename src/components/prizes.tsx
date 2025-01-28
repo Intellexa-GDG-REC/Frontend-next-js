@@ -1,6 +1,7 @@
 'use client'
 import { motion } from "motion/react"
 import { Gradient } from "./gradient"
+import { PrizeCard } from "./prizeCard"
 export const Prize = () => {
     const variant = {
         initial: {
@@ -32,14 +33,12 @@ export const Prize = () => {
                     {"<Prize Pool />"}
                 </motion.h2>
             </div>
-            <div className="md:flex md:justify-evenly md:items-center mt-20">
-                <div className="md:w-[400px] md:h-[500px] w-full h-[500px] border border-white/10 bg-grid-white/5 rounded-xl relative mb-10">
-                    <Gradient />
-                    <div className=" rounded-2xl absolute pointer-events-none inset-0 flex items-center justify-center bg-[#0a0a0a] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+            <div className="lg:flex lg:justify-evenly lg:items-center">
+                <div>
+                    <PrizeCard title="Top 10 Contributors💰" description="$5000 for each of the top 10 Contributors💰" amount="$5000" />
                 </div>
-                <div className="md:w-[400px] md:h-[500px] w-full h-[500px] border border-white/10 bg-grid-white/5 rounded-xl relative mb-10">
-                    <Gradient />
-                    <div className=" rounded-2xl absolute pointer-events-none inset-0 flex items-center justify-center bg-[#0a0a0a] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+                <div>
+                    <PrizeCard title="Best Women Contributor💰" description="$2500 for the Best Women Contributor💰" amount="$2500" />
                 </div>
             </div>
         </div>

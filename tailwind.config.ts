@@ -18,12 +18,28 @@ export default {
     extend: {
       fontFamily: {
         clash: ["Clash Grotesk", "sans-serif"],
+        outwardBlock: ["Outward Block", "sans-serif"],
       },
       backgroundImage: {
         "radial-small":
           "radial-gradient(circle 40% at top, var(--color-bg1), var(--color-bg2))",
       },
+      animation: {
+        marquee: "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
+      },
       colors: {
+        mygreen: "#22c55e",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
