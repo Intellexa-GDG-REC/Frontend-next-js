@@ -1,9 +1,16 @@
+"use client"
 import styles from './style.module.scss';
 import { motion } from 'framer-motion';
 import { links, footerLinks } from './data';
 import { perspective, slideIn } from "./anim";
+import { useAuthStore } from '@/lib/auth';
 
 export default function index() {
+    const { setUser } = useAuthStore()
+    const handleLogout = () => {
+        document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        setUser(null);
+    };
     return (
         <div className={styles.nav}>
             <div className={styles.body}>
@@ -19,9 +26,15 @@ export default function index() {
                                     animate="enter"
                                     exit="exit"
                                 >
-                                    <a href={href}>
-                                        {title}
-                                    </a>
+                                    {
+                                        title !== "Logout" ? (
+                                            <a href={href}>
+                                                {title}
+                                            </a>
+                                        ) : (
+                                            <p className='cursor-pointer' onClick={handleLogout}>{title}</p>
+                                        )
+                                    }
                                 </motion.div>
                             </div>
                         )

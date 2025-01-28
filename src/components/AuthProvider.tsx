@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setUser(userStats)
           return userStats;
         } else {
-          console.error('Failed to fetch user stats:', response.status);
+          console.log('Failed to fetch user stats:', response.status);
         }
       } catch (error) {
         console.error('Error fetching user stats:', error);

@@ -13,7 +13,7 @@
             perspective: 120px;
             perspective-origin: bottom;
         }
-        a{
+        a, p{
             text-decoration: none;
             color: black;
             font-size: 46px;
@@ -22,7 +22,7 @@
     .footer{
         display: flex;
         flex-wrap: wrap;
-        a{
+        a, p{
             width: 50%;
             margin-top: 5px;
         }

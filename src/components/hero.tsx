@@ -2,6 +2,8 @@
 import { motion } from "motion/react"
 import { useEffect, useState } from "react";
 import { AddCommitSvg } from "./addCommitSvg";
+import { useAuthStore } from '@/lib/auth'
+import { JoinNow } from "./joinNow";
 
 export const Hero = () => {
     const [isInitialRender, setIsInitialRender] = useState(true);
@@ -19,6 +21,7 @@ export const Hero = () => {
             window.removeEventListener("mousemove", handleMouseMove);
         };
     }, []);
+
     return (
         <div className="flex flex-col justify-center items-center min-h-[100vh]">
             <div className="relative px-52 py-36">
@@ -116,14 +119,7 @@ export const Hero = () => {
                         transition={{ duration: 0.5, ease: "easeInOut", type: "spring", damping: 10, delay: 0.6 }}
                         initial={{ y: -20, opacity: 0 }}
                         className="text-2xl mt-5">An inter-college GitHub collaboration to build, innovate, and <span className="text-green-400">connect</span></motion.h3>
-                    <motion.button
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, ease: "easeInOut", type: "spring", damping: 10, delay: isInitialRender ? 0.9 : 0 }}
-                        initial={{ y: -20, opacity: 0 }}
-                        whileHover={{ y: -2 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="mt-6 text-xl px-5 py-3 bg-gradient-to-b from-green-400 to-green-500 text-black rounded-xl duration-200 hover:drop-shadow-[0_16px_24px_rgba(34,197,94,0.35)]">Join now
-                    </motion.button>
+                    <JoinNow />
                 </div>
             </div>
             <AddCommitSvg></AddCommitSvg>
