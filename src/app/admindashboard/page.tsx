@@ -265,71 +265,81 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 p-8">
-      <header className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold text-gray-100">Admin Dashboard</h1>
-        <button onClick={handleLogout} className="text-sm font-bold text-white bg-blue-700 rounded-lg p-3">
-          Logout
-        </button>
-        <input
-          type="text"
-          placeholder="Search..."
-          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </header>
-      <nav className="flex mb-6">
-        <button
-          onClick={() => setActiveTab("users")}
-          className={`px-4 py-2 mr-4 rounded-lg ${activeTab === "users" ? "bg-blue-500" : "bg-gray-700"} text-white`}
-        >
-          Users
-        </button>
-        <button
-          onClick={() => setActiveTab("contributions")}
-          className={`px-4 py-2 rounded-lg ${activeTab === "contributions" ? "bg-blue-500" : "bg-gray-700"} text-white`}
-        >
-          Contributions
-        </button>
-      </nav>
-      {renderContent()}
-      {isModalOpen && selectedUser && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 text-white p-6 rounded-lg max-w-lg w-full">
-            <h2 className="text-xl font-bold mb-4">User Details</h2>
-            <div className="mb-4">
-              <h3 className="text-gray-300">Username: {selectedUser.user_name}</h3>
-              <a
-                href={selectedUser.github_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 text-sm"
-              >
-                Visit Profile
-              </a>
-            </div>
-            <div className="mb-4">
-              <label className="block mb-2">Score</label>
-              <input
-                type="number"
-                value={selectedUser.score}
-                onChange={(e) => handleEdit("score", Number(e.target.value))}
-                className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 w-full"
-              />
-            </div>
-            <div className="flex justify-end">
-              <button onClick={handleCloseModal} className="bg-gray-600 text-white px-4 py-2 rounded-lg mr-2">
-                Cancel
-              </button>
-              <button onClick={()=> handleSaveChanges(selectedUser.score,selectedUser.user_id,selectedUser.user_name)} className="bg-blue-500 text-white px-4 py-2 rounded-lg">
-                Save
-              </button>
-            </div>
+    <div className="max-h-screen-full max-w-screen bg-gray-900 p-8">
+    <header className="flex items-center justify-between mb-6">
+      <h1 className="text-3xl font-bold text-gray-100">Admin Dashboard</h1>
+      <button
+        onClick={handleLogout}
+        className="text-sm font-bold text-white bg-blue-700 rounded-lg p-3 hover:bg-blue-800 transition-colors"
+      >
+        Logout
+      </button>
+      <input
+        type="text"
+        placeholder="Search..."
+        className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </header>
+    <nav className="flex mb-6">
+      <button
+        onClick={() => setActiveTab("users")}
+        className={`px-4 py-2 mr-4 rounded-lg ${activeTab === "users" ? "bg-blue-500" : "bg-gray-700"} text-white hover:bg-blue-600 transition-colors`}
+      >
+        Users
+      </button>
+      <button
+        onClick={() => setActiveTab("contributions")}
+        className={`px-4 py-2 rounded-lg ${activeTab === "contributions" ? "bg-blue-500" : "bg-gray-700"} text-white hover:bg-blue-600 transition-colors`}
+      >
+        Contributions
+      </button>
+    </nav>
+    {renderContent()}
+    {isModalOpen && selectedUser && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-gray-800 text-white p-6 rounded-lg max-w-lg w-full">
+          <h2 className="text-xl font-bold mb-4">User Details</h2>
+          <div className="mb-4">
+            <h3 className="text-gray-300">Username: {selectedUser.user_name}</h3>
+            <a
+              href={selectedUser.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 text-sm hover:underline"
+            >
+              Visit Profile
+            </a>
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2">Score</label>
+            <input
+              type="number"
+              value={selectedUser.score}
+              onChange={(e) => handleEdit("score", Number(e.target.value))}
+              className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 w-full"
+            />
+          </div>
+          <div className="flex justify-end">
+            <button
+              onClick={handleCloseModal}
+              className="bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-gray-700 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => handleSaveChanges(selectedUser.score, selectedUser.user_id, selectedUser.user_name)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+            >
+              Save
+            </button>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    )}
+  </div>
+  
   );
 };
 
