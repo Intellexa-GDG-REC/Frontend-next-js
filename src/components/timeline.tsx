@@ -11,35 +11,21 @@ type TimelineItem = {
 
 const timelineData = [
     {
-        date: "FEB 14 2025",
+        date: "Jan 1 - Jan 20",
         title: "Registration Starts",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa optio suscipit sed earum ratione numquam quas recusandae animi soluta voluptatum, ducimus nesciunt delectus? Sed dolorem aliquid omnis suscipit. Ut, ea?"
+        description: "Volunteers are finalised and Website goes live."
     },
     {
-        date: "FEB 14 2025",
+        date: "Jan 20 - Feb 15",
         title: "Registration Starts",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa optio suscipit sed earum ratione numquam quas recusandae animi soluta voluptatum, ducimus nesciunt delectus? Sed dolorem aliquid omnis suscipit. Ut, ea?"
+        description: "Promotional activities and Registration of contributors"
     },
     {
-        date: "FEB 14 2025",
+        date: "Jan 20 - Feb 28",
         title: "Registration Starts",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa optio suscipit sed earum ratione numquam quas recusandae animi soluta voluptatum, ducimus nesciunt delectus? Sed dolorem aliquid omnis suscipit. Ut, ea?"
     },
-    {
-        date: "FEB 14 2025",
-        title: "Registration Starts",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa optio suscipit sed earum ratione numquam quas recusandae animi soluta voluptatum, ducimus nesciunt delectus? Sed dolorem aliquid omnis suscipit. Ut, ea?"
-    },
-    {
-        date: "FEB 14 2025",
-        title: "Registration Starts",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa optio suscipit sed earum ratione numquam quas recusandae animi soluta voluptatum, ducimus nesciunt delectus? Sed dolorem aliquid omnis suscipit. Ut, ea?"
-    },
-    {
-        date: "FEB 14 2025",
-        title: "Registration Starts",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa optio suscipit sed earum ratione numquam quas recusandae animi soluta voluptatum, ducimus nesciunt delectus? Sed dolorem aliquid omnis suscipit. Ut, ea?"
-    },
+    
 ];
 
 export const Timeline = () => {

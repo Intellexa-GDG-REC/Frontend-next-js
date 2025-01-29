@@ -28,7 +28,7 @@ const AdminDashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-
+  const [projects, setProjects] = useState([]);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -193,7 +193,30 @@ const AdminDashboard: React.FC = () => {
       document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     });
   };
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/projects", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: "",
+            tags: [""],
+          }),
+        });
 
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+       // setLoading(false);
+      }
+    
+    };
+
+    fetchProjects();
+  }, []);
 
   const renderContent = () => {
     if (activeTab === "users") {
@@ -206,13 +229,10 @@ const AdminDashboard: React.FC = () => {
               className={`flex items-center justify-between p-4 rounded-[20px] mb-4 ${user.banned ? "bg-red-900 text-red line-through" : "bg-gray-800"}`}
             >
               <div className="flex items-center">
-                <img
-                  src={user.github_img_url}
-                  alt={user.user_name}
-                  className={`w-10 h-10 rounded-full mr-4 ${user.banned ? 'grayscale' : ''}`}
-                />
-                <div>
-                  <h2 className="text-gray-100 font-bold">{user.user_name}</h2>
+              <img src={`https://placehold.co/100x100/purple/white?text=${user.github_username.charAt(0).toUpperCase()}`} alt={user.github_username} className="w-10 h-10 rounded-xl" />
+                  
+                <div className="ml-3">
+                  <h2 className="text-gray-100  font-bold">{user.user_name}</h2>
                   <h3 className="text-gray-300">Score: {user.score}</h3>
                   <button
                     onClick={() => handleOpenModal(user)}
@@ -226,13 +246,13 @@ const AdminDashboard: React.FC = () => {
                 <div>
                   <button
                     onClick={() => handleunBan(user.user_id,user.user_name)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg mr-2"
+                    className="bg-red-500 text-white px-4 py-2 rounded-[20px] mr-2"
                   >
                     UnBan
                   </button>
                   <button
                     onClick={() => handleDelete(user.user_name)}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg"
+                    className="bg-gray-700 text-white px-4 py-2 rounded-[20px]"
                   >
                     Delete
                   </button>
@@ -241,13 +261,13 @@ const AdminDashboard: React.FC = () => {
                 <div>
                   <button
                     onClick={() => handleBan(user.user_id,user.user_name)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg mr-2"
+                    className="bg-red-500 text-white px-4 py-2 rounded-[20px] mr-2"
                   >
                     Ban
                   </button>
                   <button
                     onClick={() => handleDelete(user.user_name)}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg"
+                    className="bg-gray-700 text-white px-4 py-2 rounded-[20px]"
                   >
                     Delete
                   </button>
@@ -260,28 +280,48 @@ const AdminDashboard: React.FC = () => {
     }
 
     if (activeTab === "contributions") {
-      return <div>Contributions tab content goes here</div>;
+      return  <div>
+      <h2 className="text-xl text-white font-bold text-white mb-4">Contributions</h2>
+      {projects.length > 0 ? (
+        <ul>
+          {projects.map((project, index) => (
+            <li key={index} className="p-2 bg-gray-800 rounded-lg mb-2">
+              {project}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No contributions found.</p>
+      )}
+    </div>;
     }
   };
 
   return (
     <div className="max-h-screen-full w-full bg-gray-900 p-8">
-    <header className="flex items-center justify-between mb-6">
-      <h1 className="text-3xl font-bold text-gray-100">Admin Dashboard</h1>
-      <button
-        onClick={handleLogout}
-        className="text-sm font-bold text-white bg-blue-700 rounded-[20px] p-3 hover:bg-blue-800 transition-colors"
-      >
-        Logout
-      </button>
-      <input
-        type="text"
-        placeholder="Search..."
-        className="px-4 py-2 rounded-[20px] bg-gray-700 text-gray-200"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-    </header>
+<header className="flex flex-wrap items-center justify-between gap-4 mb-6">
+  <h1 className="text-3xl font-bold text-gray-100 whitespace-nowrap">
+    Admin Dashboard
+  </h1>
+  <button
+    onClick={handleLogout}
+    className="min-w-1/2 text-sm font-bold text-white bg-blue-700 rounded-full p-3 hover:bg-blue-800 transition-colors"
+  >
+    Logout
+  </button>
+  {/* Search Input */}
+  <input
+    type="text"
+    placeholder="Search..."
+    className="px-4  py-2 rounded-full bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+
+  {/* Logout Button */}
+  
+</header>
+
     <nav className="flex mb-6">
       <button
         onClick={() => setActiveTab("users")}

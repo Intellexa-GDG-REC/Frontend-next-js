@@ -66,7 +66,7 @@ export default function Admin() {
   </div>
 
   {/* Main content layer */}
-  <div className="w-full h-full max-w-md bg-gray-800 shadow-md rounded-lg p-6 z-20">
+  <div className="w-full h-1/2 max-w-md bg-gray-800 shadow-md rounded-lg p-6 z-20">
     <h1 className="text-2xl font-bold text-center text-gray-100 mb-6">
       Admin Login
     </h1>
