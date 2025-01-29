@@ -11,8 +11,10 @@
   "dependencies": {
     "@devnomic/marquee": "^1.0.2",
     "@next/env": "^15.1.4",
+    "@shadcn/ui": "^0.0.4",
     "@studio-freight/lenis": "^1.0.42",
     "@studio-freight/tempus": "^0.0.44",
+    "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

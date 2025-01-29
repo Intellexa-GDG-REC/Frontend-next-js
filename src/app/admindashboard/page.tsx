@@ -203,7 +203,7 @@ const AdminDashboard: React.FC = () => {
           {filteredUsers.map((user) => (
             <div
               key={user.user_id}
-              className={`flex items-center justify-between p-4 rounded-lg mb-4 ${user.banned ? "bg-red-900 text-red line-through" : "bg-gray-800"}`}
+              className={`flex items-center justify-between p-4 rounded-[20px] mb-4 ${user.banned ? "bg-red-900 text-red line-through" : "bg-gray-800"}`}
             >
               <div className="flex items-center">
                 <img
@@ -265,19 +265,19 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="max-h-screen-full max-w-screen bg-gray-900 p-8">
+    <div className="max-h-screen-full w-full bg-gray-900 p-8">
     <header className="flex items-center justify-between mb-6">
       <h1 className="text-3xl font-bold text-gray-100">Admin Dashboard</h1>
       <button
         onClick={handleLogout}
-        className="text-sm font-bold text-white bg-blue-700 rounded-lg p-3 hover:bg-blue-800 transition-colors"
+        className="text-sm font-bold text-white bg-blue-700 rounded-[20px] p-3 hover:bg-blue-800 transition-colors"
       >
         Logout
       </button>
       <input
         type="text"
         placeholder="Search..."
-        className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200"
+        className="px-4 py-2 rounded-[20px] bg-gray-700 text-gray-200"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -285,13 +285,13 @@ const AdminDashboard: React.FC = () => {
     <nav className="flex mb-6">
       <button
         onClick={() => setActiveTab("users")}
-        className={`px-4 py-2 mr-4 rounded-lg ${activeTab === "users" ? "bg-blue-500" : "bg-gray-700"} text-white hover:bg-blue-600 transition-colors`}
+        className={`px-4 py-2 mr-4 rounded-[20px] ${activeTab === "users" ? "bg-blue-500" : "bg-gray-700"} text-white hover:bg-blue-600 transition-colors`}
       >
         Users
       </button>
       <button
         onClick={() => setActiveTab("contributions")}
-        className={`px-4 py-2 rounded-lg ${activeTab === "contributions" ? "bg-blue-500" : "bg-gray-700"} text-white hover:bg-blue-600 transition-colors`}
+        className={`px-4 py-2 rounded-[20px] ${activeTab === "contributions" ? "bg-blue-500" : "bg-gray-700"} text-white hover:bg-blue-600 transition-colors`}
       >
         Contributions
       </button>
@@ -299,7 +299,7 @@ const AdminDashboard: React.FC = () => {
     {renderContent()}
     {isModalOpen && selectedUser && (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-gray-800 text-white p-6 rounded-lg max-w-lg w-full">
+        <div className="bg-gray-800 text-white p-6 rounded-[20px] max-w-lg w-full">
           <h2 className="text-xl font-bold mb-4">User Details</h2>
           <div className="mb-4">
             <h3 className="text-gray-300">Username: {selectedUser.user_name}</h3>
@@ -318,19 +318,19 @@ const AdminDashboard: React.FC = () => {
               type="number"
               value={selectedUser.score}
               onChange={(e) => handleEdit("score", Number(e.target.value))}
-              className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 w-full"
+              className="px-4 py-2 rounded-[20px] bg-gray-700 text-gray-200 w-full"
             />
           </div>
           <div className="flex justify-end">
             <button
               onClick={handleCloseModal}
-              className="bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-gray-700 transition-colors"
+              className="bg-gray-600 text-white px-4 py-2 rounded-[20px] mr-2 hover:bg-gray-700 transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={() => handleSaveChanges(selectedUser.score, selectedUser.user_id, selectedUser.user_name)}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              className="bg-blue-500 text-white px-4 py-2 rounded-[20px] hover:bg-blue-600 transition-colors"
             >
               Save
             </button>

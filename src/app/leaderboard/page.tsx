@@ -12,30 +12,26 @@ type LeaderBoardItem = {
   score: number;
 };
 
+const getScale = (index: number) => {
+  return index === 1 ? "scale-100" : "scale-75";
+};
+
 const RankBadge = ({ rank }: { rank: number }) => {
   const getBadgeStyle = (rank: number) => {
     switch (rank) {
-      case 1:
-        return "bg-amber-500/20 text-amber-500 border-amber-500/50";
-      case 2:
-        return "bg-gray-300/20 text-gray-300 border-gray-300/50";
-      case 3:
-        return "bg-amber-700/20 text-amber-700 border-amber-700/50";
-      default:
-        return "bg-gray-800 text-gray-400 border-gray-700";
+      case 1: return "bg-amber-500/20 text-amber-500 border-amber-500/50";
+      case 2: return "bg-gray-300/20 text-gray-300 border-gray-300/50";
+      case 3: return "bg-amber-700/20 text-amber-700 border-amber-700/50";
+      default: return "bg-gray-800 text-gray-400 border-gray-700";
     }
   };
 
   const getIcon = (rank: number) => {
     switch (rank) {
-      case 1:
-        return <Trophy className="w-4 h-4" />;
-      case 2:
-        return <Medal className="w-4 h-4" />;
-      case 3:
-        return <Award className="w-4 h-4" />;
-      default:
-        return rank;
+      case 1: return <Trophy className="w-4 h-4" />;
+      case 2: return <Medal className="w-4 h-4" />;
+      case 3: return <Award className="w-4 h-4" />;
+      default: return rank;
     }
   };
 
@@ -53,13 +49,15 @@ export default function Leaderboard() {
   const [isLoading, setIsLoading] = useState(true);
   const itemsPerPage = 5;
 
-  const fetchData = async (pageNum: number) => {
+  const fetchData = async () => {
     setIsLoading(true);
     try {
       const response = await fetch(`http://localhost:8080/leaderboard`);
       const responseData = await response.json();
-      setData(responseData || []);
-      setTotalPages(Math.ceil(responseData.length / itemsPerPage) || 1);
+      if (Array.isArray(responseData)) {
+        setData(responseData);
+        setTotalPages(Math.ceil(responseData.length / itemsPerPage) || 1);
+      }
     } catch (error) {
       console.error("Failed to fetch leaderboard data:", error);
     } finally {
@@ -68,8 +66,8 @@ export default function Leaderboard() {
   };
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+    fetchData();
+  }, []);
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -77,117 +75,79 @@ export default function Leaderboard() {
     }
   };
 
+  const leader = () => {
+    if (data.length < 3) return null;
+
+    const reorderedData = [data[1], data[0], data[2]];
+    return reorderedData.map((item, index) => (
+      <div key={item.user_id} className={`w-full hover:bg-indigo-500 hover:shadow-lg p-6 shadow-xl rounded-[10px] bg-gradient-to-r from-blue-500 to-purple-600 ${getScale(index)}`}>
+        <div className="flex flex-col items-center text-white">
+          <img
+            src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}&font=montserrat`}
+            alt={item.github_username}
+            className="w-32 h-32 rounded-full object-cover border-4 border-white"
+          />
+          <p className="mt-4 text-2xl font-bold">{item.user_name}</p>
+        </div>
+      </div>
+    ));
+  };
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] w-screen">
-      <motion.div 
-        className="mx-auto px-4 py-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="relative">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-2xl md:text-5xl font-bold text-white text-center w-full">
-              Leaderboard
-            </h1>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => fetchData(currentPage)}
-              className="p-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors"
-            >
-              <RotateCw className="w-5 h-5 text-gray-400" />
-            </motion.button>
-          </div>
+    <div className="min-h-screen bg-[#0a0a0a] w-screen text-white">
+      <motion.div className="mx-auto px-4 py-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <div className="text-center py-10">
+          <h1 className="text-2xl md:text-5xl font-bold text-white">Gitrecquest || Top Performers</h1>
+          <div className="flex justify-center w-full gap-5 mt-10">{leader()}</div>
+        </div>
 
-          {/* Leaderboard Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-800">
-                  <th className="px-4 py-3 text-left text-gray-400 font-medium">Rank</th>
-                  <th className="px-4 py-3 text-left text-gray-400 font-medium">Player</th>
-                  <th className="px-4 py-3 text-left text-gray-400 font-medium">PRs</th>
-                  <th className="px-4 py-3 text-left text-gray-400 font-medium">Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, index) => (
-                  <motion.tr
-                    key={item.user_id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors"
-                  >
-                    <td className="px-4 py-4">
-                      <RankBadge rank={(currentPage - 1) * itemsPerPage + index + 1} />
-                    </td>
-                    <td className="px-4 py-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="relative w-10 h-10">
-                          <img
-                            src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}&font=montserrat`}
-                            alt={`${item.github_username}'s avatar`}
-                            className="rounded-xl object-cover"
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <a
-                            href={item.github_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-white hover:text-blue-400 transition-colors font-medium"
-                          >
-                            {item.user_name || item.github_username}
-                          </a>
-                          <span className="text-sm text-gray-500">@{item.github_username}</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-purple-500/20 text-purple-400">
-                        {item.pr_count}
-                      </span>
-                    </td>
-                    <td className="px-4 py-4">
-                      <span className="text-gray-300 font-semibold">{item.score}</span>
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        
+        <div className="flex items-center justify-between w-full">
+  
 
-          {/* Pagination */}
-          <div className="mt-6 flex items-center justify-between">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gray-800 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition-colors"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span>Previous</span>
-            </motion.button>
+  <div className="flex-grow text-center">
+    <h1 className="text-2xl md:text-5xl font-bold text-white">Leaderboard</h1>
+  </div>
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={fetchData}
+    className="p-2 rounded-xl bg-gray-800 hover:bg-gray-700"
+  >
+    <RotateCw className="w-5 h-5 text-gray-400" />
+  </motion.button>
+</div>
 
-            <span className="text-gray-400">
-              Page {currentPage} of {totalPages}
-            </span>
+        <div className="overflow-x-auto mt-6">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-800">
+                <th className="px-4 py-3 text-left text-gray-400 font-medium">Rank</th>
+                <th className="px-4 py-3 text-left text-gray-400 font-medium">Player</th>
+                <th className="px-4 py-3 text-left text-gray-400 font-medium">PRs</th>
+                <th className="px-4 py-3 text-left text-gray-400 font-medium">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((item, index) => (
+                <motion.tr key={item.user_id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="border-b border-gray-800/50 hover:bg-gray-800/30">
+                  <td className="px-4 py-4"><RankBadge rank={(currentPage - 1) * itemsPerPage + index + 1} /></td>
+                  <td className="px-4 py-4 flex items-center space-x-3">
+                    <img src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}`} alt={item.github_username} className="w-10 h-10 rounded-xl" />
+                    <a href={item.github_url} target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400">{item.user_name || item.github_username}</a>
+                  </td>
+                  <td className="px-4 py-4">{item.pr_count}</td>
+                  <td className="px-4 py-4">{item.score}</td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gray-800 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition-colors"
-            >
-              <span>Next</span>
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </div>
+        <div className="mt-6 flex justify-between">
+          <button disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
         </div>
       </motion.div>
     </div>
