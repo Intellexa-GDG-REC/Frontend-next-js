@@ -52,7 +52,7 @@ export default function Leaderboard() {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/leaderboard`);
+      const response = await fetch(`https://api.gitrecquest.tech/leaderboard`);
       const responseData = await response.json();
       if (Array.isArray(responseData)) {
         setData(responseData);

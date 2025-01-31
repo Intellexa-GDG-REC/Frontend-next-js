@@ -19,7 +19,7 @@ export default function Login() {
       }
     }
 
-  const loginbaseurl = process.env.BASE_PUBLIC_API_URL || 'http://localhost:8080' ;
+  const loginbaseurl = process.env.BASE_PUBLIC_API_URL || 'https://api.gitrecquest.tech' ;
   //console.log(`Secret Key: ${loginbaseurl+"/auth/github/"}`);
     return (
       <main className="flex items-center justify-center p-2 h-screen w-screen animated-background h-screen bg-gradient-to-r from-white via-gray-500 to-blue-500">

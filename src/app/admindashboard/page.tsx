@@ -32,7 +32,7 @@ const AdminDashboard: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8080/admin/user", {
+        const response = await fetch("https://api.gitrecquest.tech/admin/user", {
           method: "GET", 
           credentials: "include", 
           headers: {
@@ -79,7 +79,7 @@ const AdminDashboard: React.FC = () => {
   const handleSaveChanges = async (score: number,userid: number, username: string) => {
 
     if (window.confirm(`Are you sure you want to Update Score ${username} to ${score}?`)) {
-      const response = await fetch("http://localhost:8080/admin/user/scorecount", {
+      const response = await fetch("https://api.gitrecquest.tech/admin/user/scorecount", {
         method: "POST",
         credentials: "include", 
         headers: {
@@ -122,7 +122,7 @@ const AdminDashboard: React.FC = () => {
   const handleDelete = async (username: string) => {
     alert("u dnot have permission broo :) ask aksh")
     //if (window.confirm(`Are you sure you want to delete ${username}?`)) {
-     // await fetch(`http://localhost:8080/admin/user/ban/${username}`, {
+     // await fetch(`https://api.gitrecquest.tech/admin/user/ban/${username}`, {
      //   method: "POST",
      // });
      // setUsers(users.filter((user) => user.user_name !== username));
@@ -132,7 +132,7 @@ const AdminDashboard: React.FC = () => {
 
   const handleBan = async (userId: number, username: string) => {
     if (window.confirm(`Are you sure you want to delete ${username}?`)) {
-      const response = await fetch("http://localhost:8080/admin/user/ban", {
+      const response = await fetch("https://api.gitrecquest.tech/admin/user/ban", {
         method: "POST",
         credentials: "include", 
         headers: {
@@ -153,7 +153,7 @@ const AdminDashboard: React.FC = () => {
   };
   const handleunBan = async (userId: number, username: string) => {
     if (window.confirm(`Are you sure you want to delete ${username}?`)) {
-      const response = await fetch("http://localhost:8080/admin/user/unban", {
+      const response = await fetch("https://api.gitrecquest.tech/admin/user/unban", {
         method: "POST",
         credentials: "include", 
         headers: {
@@ -176,7 +176,7 @@ const AdminDashboard: React.FC = () => {
 
   const handleLogout = async () => {
     if (window.confirm(`Are you sure you want to logout?`)) {
-      await fetch(`http://localhost:8080/admin/logout`, {
+      await fetch(`https://api.gitrecquest.tech/admin/logout`, {
         method: "POST",
         credentials: "include", 
       });
@@ -196,7 +196,7 @@ const AdminDashboard: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://localhost:8080/projects", {
+        const response = await fetch("https://api.gitrecquest.tech/projects", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

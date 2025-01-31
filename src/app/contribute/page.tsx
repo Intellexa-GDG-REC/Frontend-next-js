@@ -51,7 +51,7 @@ export default function Contribute() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axios.post('http://localhost:8080/projects', {
+                const response = await axios.post('https://api.gitrecquest.tech/projects', {
                     withCredentials: true
                 });
                 setProjects(response.data);
