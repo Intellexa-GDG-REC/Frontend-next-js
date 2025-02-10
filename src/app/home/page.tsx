@@ -35,7 +35,8 @@ export default function Home() {
             <About />
             <Timeline />
             <Prize />
-           {/*<Collab/> */} 
+            
+           <Collab/> 
             <Footer />
         </div>
         </div>

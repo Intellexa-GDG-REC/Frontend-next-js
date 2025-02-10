@@ -27,8 +27,8 @@ const timelineData = [
     },
     {
         date: "Feb 20 - Mar 30",
-        title: "lets Get Started",
-        description: "open Source contributions phase"
+        title: "Lets Get Started",
+        description: "Open Source contributions phase"
     },
     {
         date: "Apr 10 - Apr 25",

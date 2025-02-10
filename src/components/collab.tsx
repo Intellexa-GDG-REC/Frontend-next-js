@@ -1,31 +1,104 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import "react-slideshow-image/dist/styles.css";
+import React from "react";
+import { Slide } from "react-slideshow-image";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
-const slides = [
-  "https://i.pinimg.com/736x/92/44/3a/92443a61d25cf4e18f33ee6876aad09b.jpg",
-  "/images/slide2.jpg",
-  "/images/slide3.jpg"
+const slideImages = [
+  {
+    url: "/collab/catchBlock.jpg",
+    caption: "Slide 1"
+  },
+  {
+    url: "/collab/Chennai_Data_Circle.jpg",
+    caption: "Slide 2"
+  },
+  {
+    url: "/collab/Code_Sapiens.png",
+    caption: "Slide 3"
+  },
+  {
+    url: "/collab/codeKrafters.png",
+    caption: "Slide 4"
+  },
+  {
+    url: "/collab/GeekCoders.jpg",
+    caption: "Slide 5"
+  },
+  {
+    url: "/collab/kenesis.jpg",
+    caption: "Slide 6"
+  },
+  {
+    url: "/collab/Namma_Flutter.jpg",
+    caption: "Slide 7"
+  }
 ];
 
-export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+const variant = {
+  initial: {
+      opacity: 0,
+      y: -20
+  },
+  animate: {
+      opacity: 1,
+      y: 0
+  },
+};
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
+const Slideshow = () => {
   return (
-    <div className="min-h-screen h-[100px] flex items-center justify-center">
-      <div className="relative w-full max-w-2xl">
-        <img
-          src={slides[currentSlide]}
-          alt="Slide"
-          className="w-full h-auto rounded-2xl shadow-lg"
-        />
+    <div>
+      <motion.h2
+        className="block bg-green-500 w-[35%] mx-auto text-black md:text-5xl text-3xl px-1 py-5 text-center rounded-lg"
+        variants={variant}
+        initial="initial"
+        whileInView="animate"
+        transition={{
+          duration: 0.5,
+          ease: "easeInOut",
+          type: "spring",
+          damping: 10,
+          delay: 0.3
+        }}
+        viewport={{ once: true }}
+      >
+        {"<Premium Sponsors />"}
+      </motion.h2>
+      <Image alt="loading" src={'/collab/kenesis.jpg'} className="mx-auto m-15 mt-[7%] transition-transform duration-300 hover:scale-[1.1] mb-[7%] rounded-[20px]" width={500} height={500}/>
+      <motion.h2
+        className="block bg-green-500 w-[35%] mx-auto text-black md:text-5xl text-3xl px-1 py-5 text-center rounded-lg"
+        variants={variant}
+        initial="initial"
+        whileInView="animate"
+        transition={{
+          duration: 0.5,
+          ease: "easeInOut",
+          type: "spring",
+          damping: 10,
+          delay: 0.3
+        }}
+        viewport={{ once: true }}
+      >
+        {"<Community Partners />"}
+      </motion.h2>
+      
+      <div className="slide-container flex justify-center items-center  mb-10 pt-10">
+        <div className="w-full ">
+          <Slide autoplay={true} slidesToShow={5} infinite={true}>
+            {[...slideImages, ...slideImages].map((slide, index) => (
+              <div key={index} className="flex flex-col items-center justify-center p-4 h-[150px] bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-700 mx-2">
+                <div className="w-full h-full flex items-center justify-center rounded-2xl overflow-hidden">
+                  <Image src={slide.url} alt={slide.caption} width={300} height={200} className="rounded-xl object-cover" />
+                </div>
+              </div>
+            ))}
+          </Slide>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Slideshow;

@@ -42,7 +42,10 @@ export const JoinNow = () => {
                 onClick={handleLogin}
                 className="mt-6 text-xl px-5 py-3 bg-gradient-to-b from-green-400 to-green-500 text-black rounded-xl duration-200 hover:drop-shadow-[0_16px_24px_rgba(34,197,94,0.35)]"
             >
-                Register Now
+                Register Now'
+
+
+                
             </motion.button>
         ) : (
             <Link href = "/contribute">
