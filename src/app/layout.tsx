@@ -13,6 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/logo.ico" sizes="any" />
       <body
         className={`antialiased font-clash bg-[#0a0a0a] flex justify-center overflow-x-hidden`}>
         <AuthProvider>

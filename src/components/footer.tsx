@@ -3,7 +3,12 @@ export const Footer = () => {
         <footer className="border-t border-white/20 py-7 flex justify-between px-6">
             <p className="text-xl">
                 Contact Us
+                <div className="mt-10">
+            Somesh     +91 99624 67601 <br></br>
+            Nandhini   +91 73058 32372
+            </div>
             </p>
+           
             <div className="flex flex-col items-start justify-start space-y-3 ">
                 <p className="text-xl">Social</p>
                 <div className="flex justify-center items-center space-x-1 cursor-pointer hover:underline hover:underline-offset-4">
@@ -14,14 +19,7 @@ export const Footer = () => {
                     </span>
                     <p className="text-xl">Instagram</p>
                 </div>
-                <div className="flex justify-center items-center space-x-1 cursor-pointer hover:underline hover:underline-offset-4">
-                    <span >
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 24 24" stroke="white">
-                            <path d="M 2.3671875 3 L 9.4628906 13.140625 L 2.7402344 21 L 5.3808594 21 L 10.644531 14.830078 L 14.960938 21 L 21.871094 21 L 14.449219 10.375 L 20.740234 3 L 18.140625 3 L 13.271484 8.6875 L 9.2988281 3 L 2.3671875 3 z M 6.2070312 5 L 8.2558594 5 L 18.033203 19 L 16.001953 19 L 6.2070312 5 z"></path>
-                        </svg>
-                    </span>
-                    <p className="text-xl">Twitter</p>
-                </div>
+               
                 <div className="flex justify-center items-center space-x-1 cursor-pointer hover:underline hover:underline-offset-4">
                     <span >
                         <svg fill="#ffffff" width="25" height="25" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
