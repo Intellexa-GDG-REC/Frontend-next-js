@@ -11,19 +11,29 @@ type TimelineItem = {
 
 const timelineData = [
     {
-        date: "Jan 1 - Jan 20",
-        title: "Registration Starts",
+        date: "Feb 10 - Feb 20",
+        title: "Game Start",
         description: "Volunteers are finalised and Website goes live."
     },
     {
-        date: "Jan 20 - Feb 15",
+        date: "Feb 10 - Feb 20",
         title: "Registration Starts",
         description: "Promotional activities and Registration of contributors"
     },
     {
-        date: "Jan 20 - Feb 28",
-        title: "Registration Starts",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa optio suscipit sed earum ratione numquam quas recusandae animi soluta voluptatum, ducimus nesciunt delectus? Sed dolorem aliquid omnis suscipit. Ut, ea?"
+        date: "Feb 20 - Mar 15",
+        title: "Learning Phase",
+        description: "Online Workshops conducted by outside communities"
+    },
+    {
+        date: "Feb 20 - Mar 30",
+        title: "lets Get Started",
+        description: "open Source contributions phase"
+    },
+    {
+        date: "Apr 10 - Apr 25",
+        title: "Finding a winners",
+        description: "Prize distribution after announcement of Winners"
     },
     
 ];

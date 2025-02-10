@@ -7,6 +7,7 @@ import { Timeline } from "@/components/timeline";
 import { Prize } from "@/components/prizes";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Metadata } from "next";
+import Collab from "@/components/collab";
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function Home() {
             <About />
             <Timeline />
             <Prize />
+           {/*<Collab/> */} 
             <Footer />
         </div>
         </div>

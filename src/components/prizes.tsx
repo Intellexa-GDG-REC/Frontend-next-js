@@ -35,10 +35,10 @@ export const Prize = () => {
             </div>
             <div className="lg:flex lg:justify-evenly lg:items-center">
                 <div>
-                    <PrizeCard title="Top 10 Contributors💰" description="$5000 for each of the top 10 Contributors💰" amount="$5000" />
+                    <PrizeCard title="Top 10 Contributors💰" description="₹5000 for each of the top 10 Contributors💰" amount="₹5000" />
                 </div>
                 <div>
-                    <PrizeCard title="Best Women Contributor💰" description="$2500 for the Best Women Contributor💰" amount="$2500" />
+                    <PrizeCard title="Best Women Contributor💰" description="₹2500 for the Best Women Contributor💰" amount="₹2500" />
                 </div>
             </div>
         </div>
