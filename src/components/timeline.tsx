@@ -90,7 +90,7 @@ const EachTimeline = ({ item, index }: EachTimelineProps) => {
             </div>}
         </div>
         
-        <div className={`bg-gray-900 p-4  rounded-[20px] shadow-lg text-white w-64 ${isLeft ? 'mr-4' : 'ml-4'}`}
+        <div className={`p-4  rounded-[20px] shadow-lg text-white w-64 ${isLeft ? 'mr-4' : 'ml-4'}`}
             style={{ textAlign: isLeft ? 'left' : 'right' }}>
             <div className="text-sm text-gray-300">{item.date}</div>
             <div className="text-lg font-semibold mt-1">{item.title}</div>
