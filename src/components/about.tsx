@@ -18,7 +18,7 @@ export const About = () => {
 
   return (
     <div>
-      <div className="px-4 sm:px-6 lg:px-[8%] min-h-screen flex flex-col lg:flex-row items-center justify-center gap-8 py-0">
+      <div className="px-4 sm:px-6 lg:px-[4%] min-h-screen flex flex-col lg:flex-row items-center justify-center gap-8 py-0">
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <motion.span
             className="inline-block bg-green-500 text-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl px-4 py-3 sm:px-6 sm:py-5"
@@ -124,14 +124,35 @@ export const About = () => {
                 </div>
 
                 <div>
-                  <svg className="mr-3" role="img" width={30} height={30} fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Rockstar Games</title><path d="M5.971 6.816h3.241c1.469 0 2.741-.448 2.741-2.084 0-1.3-1.117-1.576-2.19-1.576H6.748l-.777 3.66Zm12.834 8.753h5.168l-4.664 3.228.755 5.087-4.041-3.07L10.599 24l2.536-5.392s-2.95-3.075-2.947-3.075c-.198-.262-.265-.936-.265-1.226 0-.367.024-.739.049-1.134.028-.451.058-.933.058-1.476 0-1.338-.59-2.038-2.036-2.038H5.283l-1.18 5.525H.026L3.269 0h7.672c2.852 0 5.027.702 5.027 3.936 0 2.276-1.12 3.894-3.592 4.233v.045c1.162.276 1.598 1.062 1.598 2.527 0 .585-.018 1.098-.034 1.581-.015.428-.03.834-.03 1.243 0 .525.137 1.382.48 1.968h.567l3.028-5.06.82 5.096Zm-1.233-2.948-2.187 3.654h-3.457l2.103 2.189-1.73 3.672 3.777-2.218 2.976 2.263-.553-3.731 3.093-2.139h-3.43l-.592-3.69Z" /></svg>
-                </div>
-                <div>
-                  <svg fill="white" className="mr-3" role="img" width={30} height={30} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
-                </div>
-                <div>
-                  <svg fill="white" className="mr-3" width={30} height={30} role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Dolby</title><path d="M0 3.564v16.872h2.488c4.648 0 8.438-3.788 8.438-8.436s-3.79-8.436-8.438-8.436H0zm21.512 0c-4.648 0-8.438 3.788-8.438 8.436s3.79 8.436 8.438 8.436H24V3.564h-2.488z" /></svg>
-                </div>
+  <svg
+    className="mr-3"
+    role="img"
+    width={30}
+    height={30}
+    fill="white"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <title>Google</title>
+    <path d="M12 12v-2.56h10.56c.24 1.28.24 2.56 0 3.84H12V12Zm0 0V9.44h-2.56V12h2.56Zm-5.12 0V9.44H4.32V12h2.56Zm-5.12 0V9.44H0V12h1.76Zm5.12 0H4.32v2.56h2.56V12Zm2.56 0H4.32v2.56h5.12V12ZM12 12h10.56c-.48 3.36-3.36 6.72-7.68 6.72-4.48 0-8-3.52-8-8s3.52-8 8-8c2.08 0 4.16.8 5.76 2.24l-2.4 2.4c-.96-.96-2.24-1.44-3.36-1.44-2.88 0-5.12 2.24-5.12 5.12s2.24 5.12 5.12 5.12c2.4 0 4.32-1.6 4.96-3.84H12Z" />
+  </svg>
+</div>
+
+<div>
+  <svg
+    className="mr-3"
+    role="img"
+    width={30}
+    height={30}
+    fill="white"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <title>Dev.to</title>
+    <path d="M7.5 3.375h9A4.125 4.125 0 0 1 20.625 7.5v9a4.125 4.125 0 0 1-4.125 4.125h-9A4.125 4.125 0 0 1 3.375 16.5v-9A4.125 4.125 0 0 1 7.5 3.375ZM5.66 9.142h1.755v5.716H5.66V9.142Zm6.034 0h2.462c.742 0 1.323.59 1.323 1.323v3.07c0 .733-.581 1.323-1.323 1.323h-2.462c-.742 0-1.323-.59-1.323-1.323v-3.07c0-.733.581-1.323 1.323-1.323Zm3.248 1.142h-.977v2.462h.977v-2.462Zm-4.391 0h-.977v2.462h.977v-2.462Zm-6.6-.571h1.286v4.574H4.95v-4.574Zm9.128-2.062h-4.574a1.714 1.714 0 0 0-1.715 1.715v4.574c0 .947.767 1.715 1.715 1.715h4.574c.947 0 1.715-.768 1.715-1.715v-4.574a1.714 1.714 0 0 0-1.715-1.715Z" />
+  </svg>
+</div>
+
               </div>
             </Marquee>
           </div>

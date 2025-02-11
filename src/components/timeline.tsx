@@ -77,24 +77,32 @@ const EachTimeline = ({ item, index }: EachTimelineProps) => {
     const isLeft = index % 2 === 0;
     return (
         <motion.div 
-            className={`relative flex items-center w-full max-w-2xl ${isLeft ? 'justify-start' : 'justify-end'}`}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeIn", delay: index * 0.2 }}
-            viewport={{ once: true }}
-        >
-            <div className="relative flex items-center">
-                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-gray-800 border-4 border-white">
-                    {item.icon}
-                </div>
-            </div>
-            <div className={`bg-gray-900 p-4 rounded-lg shadow-lg text-white w-64 ${isLeft ? 'ml-6' : 'mr-6'}`}
-                style={{ textAlign: isLeft ? 'left' : 'right' }}>
-                <div className="text-sm text-gray-300">{item.date}</div>
-                <div className="text-lg font-semibold mt-1">{item.title}</div>
-                <div className="text-sm mt-2">{item.description}</div>
-            </div>
-        </motion.div>
+        className={`relative flex  items-center w-full max-w-2xl ${isLeft ? 'justify-start' : 'justify-end'}`}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeIn", delay: index * 0.2 }}
+        viewport={{ once: true }}
+    >
+        <div className="relative  flex items-center">
+        {!isLeft?<div className="w-[50px] h-[50px] ml-5 flex justify-center items-center rounded-[20px] bg-gray-800 border-4 border-white">
+                {item.icon}
+            </div>:<div>
+            </div>}
+        </div>
+        
+        <div className={`bg-gray-900 p-4  rounded-[20px] shadow-lg text-white w-64 ${isLeft ? 'mr-4' : 'ml-4'}`}
+            style={{ textAlign: isLeft ? 'left' : 'right' }}>
+            <div className="text-sm text-gray-300">{item.date}</div>
+            <div className="text-lg font-semibold mt-1">{item.title}</div>
+            <div className="text-sm mt-2">{item.description}</div>
+            
+        
+    </div>
+    {isLeft?<div className="w-[50px] h-[50px] flex justify-center items-center rounded-full bg-gray-800 border-4 border-white">
+                {item.icon}
+            </div>:<div>
+            </div>}
+    </motion.div> 
     );
 };
 

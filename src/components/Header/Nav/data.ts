@@ -15,10 +15,7 @@ export const links = [
         title: "Contribute",
         href: "/contribute"
     },
-    {
-        title: "Logout",
-        href: "/"
-    }
+   
 ]
 
 export const footerLinks = [
