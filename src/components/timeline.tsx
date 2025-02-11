@@ -1,142 +1,98 @@
 'use client'
 
 import React from 'react';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import { Rocket, Users, BookOpen, Code, Trophy } from "lucide-react";
 
 type TimelineItem = {
     date: string;
     title: string;
     description: string;
-}
+    icon: React.ReactNode;
+};
 
-const timelineData = [
+const timelineData: TimelineItem[] = [
     {
         date: "Feb 10 - Feb 20",
-        title: "Game Start",
-        description: "Volunteers are finalised and Website goes live."
+        title: "Kickoff & Website Launch",
+        description: "Finalizing volunteers and launching the event website.",
+        icon: <Rocket className="text-green-400" />
     },
     {
         date: "Feb 10 - Feb 20",
-        title: "Registration Starts",
-        description: "Promotional activities and Registration of contributors"
+        title: "Open Registrations",
+        description: "Launching promotional activities and onboarding contributors.",
+        icon: <Users className="text-blue-400" />
     },
     {
         date: "Feb 20 - Mar 15",
-        title: "Learning Phase",
-        description: "Online Workshops conducted by outside communities"
+        title: "Learning & Workshops",
+        description: "Hosting online workshops by external communities.",
+        icon: <BookOpen className="text-yellow-400" />
     },
     {
         date: "Feb 20 - Mar 30",
-        title: "Lets Get Started",
-        description: "Open Source contributions phase"
+        title: "Hands-On Contribution",
+        description: "Engaging participants in open-source contributions.",
+        icon: <Code className="text-purple-400" />
     },
     {
         date: "Apr 10 - Apr 25",
-        title: "Finding a winners",
-        description: "Prize distribution after announcement of Winners"
+        title: "Winners & Celebrations",
+        description: "Announcing winners and distributing prizes.",
+        icon: <Trophy className="text-red-400" />
     },
-    
 ];
 
 export const Timeline = () => {
-    const variant = {
-        initial: {
-            opacity: 0,
-            y: -20
-        },
-        animate: {
-            opacity: 1,
-            y: 0
-        },
-    }
-
     return (
-        <div className="mt-20 p-4 sm:p-8 md:p-12 lg:px-[8%]">
+        <div className="mt-20 p-4 sm:p-8 md:p-12 lg:px-[8%] relative">
             <div className="flex justify-center">
                 <motion.h2
-                    className="block bg-green-500 text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 py-3 sm:py-5"
-                    variants={variant}
-                    initial="initial"
-                    whileInView="animate"
-                    transition={{
-                        duration: 0.5,
-                        ease: "easeInOut",
-                        type: "spring",
-                        damping: 10,
-                        delay: 0.3
-                    }}
+                    className="block bg-green-500 text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 py-3 sm:py-5 rounded-lg"
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut", type: "spring", damping: 10, delay: 0.3 }}
                     viewport={{ once: true }}
                 >
-                    {"<Timeline />"}
+                    Event Timeline
                 </motion.h2>
             </div>
-            <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20">
-                <div className="relative px-4 sm:px-8 md:px-12 lg:px-16 grid gap-8 sm:gap-6">
-                    {timelineData.map((item, index) => (
-                        <EachTimeline
-                            key={index}
-                            item={item}
-                            last={index === timelineData.length - 1}
-                            index={index}
-                        />
-                    ))}
-                </div>
+            <div className="relative flex flex-col items-center gap-12 mt-12">
+                <div className="absolute w-1 bg-gray-400 h-full left-1/2 transform -translate-x-1/2"></div>
+                {timelineData.map((item, index) => (
+                    <EachTimeline key={index} item={item} index={index} />
+                ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 type EachTimelineProps = {
     item: TimelineItem;
-    last: boolean;
     index: number;
-}
+};
 
-const EachTimeline = ({ item, last, index }: EachTimelineProps) => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: { 
-            opacity: 1, 
-            x: 0,
-            transition:{
-                duration: 0.5, 
-                ease: "easeIn", 
-                type: "linear", 
-                damping: 10, 
-                delay: index * 0.2,
-            }
-        }
-    };
-
+const EachTimeline = ({ item, index }: EachTimelineProps) => {
+    const isLeft = index % 2 === 0;
     return (
         <motion.div 
-            className="space-y-4 relative"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
+            className={`relative flex items-center w-full max-w-2xl ${isLeft ? 'justify-start' : 'justify-end'}`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn", delay: index * 0.2 }}
             viewport={{ once: true }}
         >
-            <div className="absolute top-0 right-0 font-thin text-sm sm:text-base">{item.date}</div>
-            <div className="grid grid-cols-[auto_1fr] items-center gap-4">
-                <div className="flex justify-center w-6 sm:w-8">
-                    <div className="rounded-full w-6 h-6 sm:w-8 sm:h-8 border-4 border-white"></div>
+            <div className="relative flex items-center">
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-gray-800 border-4 border-white">
+                    {item.icon}
                 </div>
-                <div className="text-lg sm:text-xl md:text-2xl">{item.title}</div>
             </div>
-            <div className="grid grid-cols-[auto_1fr] items-start gap-4">
-                <div className="flex flex-col items-center w-6 sm:w-8 gap-3 sm:gap-5">
-                    {!last && (
-                        <>
-                            <div className="rounded-full w-2 h-2 sm:w-3 sm:h-3 bg-white"></div>
-                            <div className="rounded-full w-2 h-2 sm:w-3 sm:h-3 bg-white"></div>
-                            <div className="rounded-full w-2 h-2 sm:w-3 sm:h-3 bg-white"></div>
-                            <div className="rounded-full w-2 h-2 sm:w-3 sm:h-3 bg-white"></div>
-                        </>
-                    )}
-                </div>
-                <div className="text-sm sm:text-base">
-                    {item.description}
-                </div>
+            <div className={`bg-gray-900 p-4 rounded-lg shadow-lg text-white w-64 ${isLeft ? 'ml-6' : 'mr-6'}`}
+                style={{ textAlign: isLeft ? 'left' : 'right' }}>
+                <div className="text-sm text-gray-300">{item.date}</div>
+                <div className="text-lg font-semibold mt-1">{item.title}</div>
+                <div className="text-sm mt-2">{item.description}</div>
             </div>
         </motion.div>
     );

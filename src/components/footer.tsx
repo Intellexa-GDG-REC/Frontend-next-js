@@ -1,13 +1,28 @@
+import { Mail, Phone } from "lucide-react";
 export const Footer = () => {
     return (
         <footer className="border-t border-white/20 py-7 flex justify-between px-6">
-            <p className="text-xl">
-                Contact Us
-                <div className="mt-10">
-            Somesh     +91 99624 67601 <br></br>
-            Nandhini   +91 73058 32372
-            </div>
-            </p>
+             <div className="bg-gray-900 text-white p-6 rounded-2xl shadow-lg max-w-md ">
+      <h2 className="text-2xl font-bold border-b border-gray-900 pb-2">Contact Us</h2>
+      <div className="mt-6 space-y-4">
+        <div className="flex items-center gap-3">
+          <Phone className="text-blue-400" />
+          <span>Somesh: <a href="tel:+919962467601" className="hover:underline">+91 99624 67601</a></span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Phone className="text-blue-400" />
+          <span>Nandhini: <a href="tel:+917305832372" className="hover:underline">+91 73058 32372</a></span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Mail className="text-green-400" />
+          <a href="mailto:gdg@rajalakshmi.edu.in" className="hover:underline">gdg@rajalakshmi.edu.in</a>
+        </div>
+        <div className="flex items-center gap-3">
+          <Mail className="text-green-400" />
+          <a href="mailto:intellexa@rajalakshmi.edu.in" className="hover:underline">intellexa@rajalakshmi.edu.in</a>
+        </div>
+      </div>
+    </div>
            
             <div className="flex flex-col items-start justify-start space-y-3 ">
                 <p className="text-xl">Social</p>
