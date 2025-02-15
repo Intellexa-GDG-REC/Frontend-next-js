@@ -17,27 +17,27 @@ export default function Domain() {
     const cards = [
         {
           title: "Web development",
-          src: "https://photoszone.net/wp-content/uploads/girls-dp3.jpg",
+          src: "https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg?t=st=1739587738~exp=1739591338~hmac=92d066b3e80411926ce98dd7a7293b98ae7b902f0ff4974ead495b9c74a40fdc&w=740",
         },  
         {
           title: "App development ",
-          src: "https://photoszone.net/wp-content/uploads/girls-dp3.jpg",
+          src: "https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg?t=st=1739587738~exp=1739591338~hmac=92d066b3e80411926ce98dd7a7293b98ae7b902f0ff4974ead495b9c74a40fdc&w=740",
         },
         {
           title: "Artificial Intelligence & Machine Learning",
-          src: "https://photoszone.net/wp-content/uploads/girls-dp3.jpg",
+          src: "https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg?t=st=1739587738~exp=1739591338~hmac=92d066b3e80411926ce98dd7a7293b98ae7b902f0ff4974ead495b9c74a40fdc&w=740",
         },
         {
           title: "DS (Data Science)",
-          src: "https://photoszone.net/wp-content/uploads/girls-dp3.jpg",
+          src: "https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg?t=st=1739587738~exp=1739591338~hmac=92d066b3e80411926ce98dd7a7293b98ae7b902f0ff4974ead495b9c74a40fdc&w=740",
         },
         {
           title: "DL (Deep Learning)",
-          src: "https://photoszone.net/wp-content/uploads/girls-dp3.jpg",
+          src: "https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg?t=st=1739587738~exp=1739591338~hmac=92d066b3e80411926ce98dd7a7293b98ae7b902f0ff4974ead495b9c74a40fdc&w=740",
         },
         {
           title: "Blockchain & Web 3",
-          src: "https://photoszone.net/wp-content/uploads/girls-dp3.jpg",
+          src: "https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg?t=st=1739587738~exp=1739591338~hmac=92d066b3e80411926ce98dd7a7293b98ae7b902f0ff4974ead495b9c74a40fdc&w=740",
         },
       ];
      
