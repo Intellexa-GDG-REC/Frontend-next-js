@@ -44,17 +44,30 @@ const ProjectCard = ({ project }: { project: Project }) => (
 );
 
 export default function Contribute() {
-    const [projects, setProjects] = useState<Project[]>([]);
+    const [projects, setProjects] = useState<Project[]>([
+        {
+            ID: 1,
+            Name: "Demo Project",
+            Desc: "This is a sample project to showcase data.",
+            URL: "https://github.com/Intellexa-GDG-REC/Project_Name-GitRecQuest-v.1.0.0",
+            Tag: [],
+        },
+    
+    ]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    
     useEffect(() => {
         const fetchProjects = async () => {
             try {
                 const response = await axios.post('https://api.gitrecquest.tech/projects', {
                     withCredentials: true
                 });
-                setProjects(response.data);
+    
+                setProjects(prevProjects => [
+                    ...prevProjects,
+                    ...response.data
+                ]);
                 setError(null);
             } catch (err) {
                 setError('Failed to fetch projects. Please try again later.');
@@ -63,9 +76,10 @@ export default function Contribute() {
                 setLoading(false);
             }
         };
-
+    
         fetchProjects();
     }, []);
+    
 
     return (
         <div className="min-h-screen bg-black w-screen pt-6">

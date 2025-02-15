@@ -7,31 +7,38 @@ import { motion } from "framer-motion";
 
 const slideImages = [
   {
-    url: "/collab/catchBlock.jpg",
+    url: "/collab/img1.jpg",
     caption: "Slide 1"
   },
   {
-    url: "/collab/Chennai_Data_Circle.jpg",
+    url: "/collab/img2.jpg",
     caption: "Slide 2"
   },
   {
-    url: "/collab/Code_Sapiens.png",
+    url: "/collab/img3.jpg",
     caption: "Slide 3"
   },
   {
-    url: "/collab/codeKrafters.png",
+    url: "/collab/img4.jpg",
     caption: "Slide 4"
   },
   {
-    url: "/collab/GeekCoders.jpg",
+    url: "/collab/img5.jpg",
     caption: "Slide 5"
   },
+ 
   {
-    url: "/collab/kenesis.jpg",
-    caption: "Slide 6"
+    url: "/collab/img6.jpg",
+    caption: "Slide 7"
   },
   {
-    url: "/collab/Namma_Flutter.jpg",
+    url: "/collab/img7.jpg",
+    caption: "Slide 7"
+  },{
+    url: "/collab/img8.jpg",
+    caption: "Slide 7"
+  },{
+    url: "/collab/img9.jpg",
     caption: "Slide 7"
   }
 ];
@@ -84,11 +91,11 @@ const Slideshow = () => {
         {"<Community Partners />"}
       </motion.h2>
      
-      <div className="slide-container  mt-20  flex justify-center items-center  mb-10 pt-10">
+      <div className="slide-container mb-20  mt-20  flex justify-center items-center  mb-10 pt-10">
         <div className="w-full ">
           <Slide autoplay={true} slidesToShow={5} infinite={true}>
             {[...slideImages, ...slideImages].map((slide, index) => (
-              <div key={index} className="flex flex-col items-center justify-center p-2 h-[150px] bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-900 bg-opacity-40 mx-2">
+              <div key={index} className="flex flex-col items-center justify-center p-2 h-[300px] bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-900 bg-opacity-40 mx-2">
                 <div className="w-full h-full flex items-center justify-center rounded-2xl overflow-hidden">
                   <Image src={slide.url} alt={slide.caption} width={300} height={200} className="rounded-xl object-cover" />
                 </div>
@@ -97,7 +104,7 @@ const Slideshow = () => {
           </Slide>
         </div>
       </div>
-      <motion.h2
+      {/* <motion.h2
         className="block bg-green-500 w-[35%]  mt-20  mx-auto text-black md:text-5xl text-3xl px-1 py-5 text-center rounded-lg"
         variants={variant}
         initial="initial"
@@ -125,7 +132,7 @@ const Slideshow = () => {
             ))}
           </Slide>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

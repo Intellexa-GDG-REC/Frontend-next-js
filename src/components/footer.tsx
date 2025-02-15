@@ -34,7 +34,14 @@ export const Footer = () => {
                     </span>
                     <p className="text-xl">Instagram</p>
                 </div>
-               
+                <div className="flex justify-center items-center space-x-1 cursor-pointer hover:underline hover:underline-offset-4">
+                    <span>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" className="w-8 h-8" />
+
+
+                    </span>
+                    <p className="text-xl">Whatsapp</p>
+                </div>
                 <div className="flex justify-center items-center space-x-1 cursor-pointer hover:underline hover:underline-offset-4">
                     <span >
                         <svg fill="#ffffff" width="25" height="25" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
