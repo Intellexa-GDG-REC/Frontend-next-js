@@ -27,7 +27,7 @@ export default function NotFound() {
 
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-black p-5">
+    <main className="w-full flex flex-col items-center justify-center min-h-screen bg-black p-5">
      
       <Image
       onClick={handleClick}

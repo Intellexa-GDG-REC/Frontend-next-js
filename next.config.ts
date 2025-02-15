@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['img.freepik.com','avatars.githubusercontent.com','placehold.co', 'images.unsplash.com'], //https://placehold.co/600x400?font=roboto
+    domains: ['img.freepik.com','avatars.githubusercontent.com','placehold.co', 'images.unsplash.com',"assets.aceternity.com" ,"photoszone.net"], //https://placehold.co/600x400?font=roboto
   },
   async redirects() {
     

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AddCommitSvg } from "./addCommitSvg";
 import { useAuthStore } from '@/lib/auth'
 import { JoinNow } from "./joinNow";
+import { FlipWords } from "./ui/flip-words";
 
 export const Hero = () => {
     const [isInitialRender, setIsInitialRender] = useState(true);
@@ -21,7 +22,7 @@ export const Hero = () => {
             window.removeEventListener("mousemove", handleMouseMove);
         };
     }, []);
-
+    const words = ["Connect", "Create", "New", "Modern"];
     return (
         <div className="flex flex-col justify-center items-center min-h-[100vh]">
             <div className="relative px-52 py-36">
@@ -122,7 +123,7 @@ export const Hero = () => {
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, ease: "easeInOut", type: "spring", damping: 10, delay: 0.6 }}
                         initial={{ y: -20, opacity: 0 }}
-                        className="text-2xl mt-5">An inter-college GitHub collaboration to build, innovate, and <span className="text-green-400">connect</span></motion.h3>
+                        className="text-3xl mt-5">An inter-college GitHub collaboration to build, innovate, and<FlipWords words={words} /> <br /></motion.h3>
                     <JoinNow />
                 </div>
             </div>

@@ -109,9 +109,9 @@ export const About = () => {
           </motion.div>
         </div>
       </div>
-      <div className="lg:mt-0 md:mt-20 mt-12" >
+      <div className="w-full" >
         <div className="flex flex-col justify-center items-center">
-          <div className="w-full max-w-3xl rounded-lg shadow-lg overflow-hidden">
+          <div className="w-full  rounded-lg shadow-lg overflow-hidden">
             <Marquee containerClassName="cntr" duration={10}>
               <div className="flex space-x-3 items-center justify-center">
                 <div>

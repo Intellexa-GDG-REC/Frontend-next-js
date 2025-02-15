@@ -25,6 +25,9 @@ export default {
           "radial-gradient(circle 40% at top, var(--color-bg1), var(--color-bg2))",
       },
       animation: {
+        
+          "spin-slow": "spin 5s linear infinite", // Adjust speed here
+        
         marquee: "marquee var(--duration) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
