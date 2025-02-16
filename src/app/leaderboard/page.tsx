@@ -2,7 +2,8 @@
 import { useState, useEffect, useId, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, RotateCw, Trophy, Medal, Award } from "lucide-react";
-
+import { AnimatePresence } from "motion/react"
+import { Footer } from "@/components/footer";
 
 type LeaderBoardItem = {
   user_id: number;
@@ -117,13 +118,21 @@ export default function Leaderboard() {
     <div className="min-h-screen bg-[#0a0a0a] w-screen text-white">
       <motion.div className="mx-auto px-4 py-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
         <div className="text-center py-10">
-          <h1 className="text-2xl md:text-5xl font-bold text-white">Gitrecquest || Top Performers</h1>
+        
+          
+    <h1 className="text-2xl md:text-5xl font-bold font-bold m-4 text-white mr-1">Gitrecquest ||
+        <a href="" aria-disabled
+            className="bg-gradient-to-r pointer-events-none ml-1 from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_4px] bg-no-repeat bg-bottom">
+             Top Performers
+        </a>
+    </h1>
+
           <div className="flex justify-center w-full gap-5 mt-10">{leader()}</div>
         </div>
 
         <div className="flex items-center justify-between w-full">
           <div className="flex-grow text-center">
-            <h1 className="text-2xl md:text-5xl font-bold text-white">Leaderboard</h1>
+            <h1 className="text-2xl mt-10 md:text-5xl font-bold text-white">Leaderboard</h1>
           </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -174,20 +183,27 @@ export default function Leaderboard() {
           </table>
         </div>
 
-        <div className="mt-6 flex justify-between">
-          <button disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
-          <span>Page {currentPage} of {totalPages}</span>
-          <button disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
+        <div className="mt-6 flex  justify-center space-x-[10%]">
+          <button className="bg-green-400 p-3 rounded-[15px] w-[7%] bg-opacity-60 hover:bg-opacity-100" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
+          <span className="my-auto">Page {currentPage} of {totalPages}</span>
+          <button className="bg-green-400 p-3 rounded-[15px] w-[7%] bg-opacity-60 hover:bg-opacity-100" disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
         </div>
       </motion.div>
+      <AnimatePresence>
       {selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <motion.div
+          exit={{ opacity: 0 }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
             className="bg-gray-900 p-6 rounded-[20px] w-[400px] text-white shadow-lg"
           >
+             <img
+                      src={selectedUser.github_img_url}
+                      alt={selectedUser.github_username}
+                      className="w-50 h-50 mb-2 mx-auto rounded-xl"
+                    />
             <h2 className="text-xl font-bold mb-2">{selectedUser.user_name || selectedUser.github_username}</h2>
             <p><strong>GitHub:</strong> <a href={selectedUser.github_url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{selectedUser.github_url}</a></p>
             <p><strong>PRs:</strong> {selectedUser.pr_count}</p>
@@ -195,11 +211,13 @@ export default function Leaderboard() {
           
 
             <button onClick={closeModal} className="mt-4 w-full py-2 bg-red-600 hover:bg-red-700 rounded-[20px]">
-              Close
+            <motion.p exit={{ y: 10 }}>Close</motion.p>
             </button>
           </motion.div>
         </div>
       )}
+</AnimatePresence>
+     <Footer /> 
     </div>
   );
 }
