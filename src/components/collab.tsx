@@ -1,7 +1,7 @@
 "use client";
 import "react-slideshow-image/dist/styles.css";
-import React from "react";
-import { Slide } from "react-slideshow-image";
+import React, { useEffect, useState } from "react";
+import { Marquee } from "./marquee";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -28,7 +28,7 @@ const slideImages = [
   },
   {
     url: "/collab/img6.jpg",
-    caption: "Slide 7"
+    caption: "Slide 6"
   },
   {
     url: "/collab/img7.jpg",
@@ -36,11 +36,13 @@ const slideImages = [
   },
   {
     url: "/collab/img8.jpg",
-    caption: "Slide 7"
+
+    caption: "Slide 8"
+
   },
   {
     url: "/collab/img9.jpg",
-    caption: "Slide 7"
+    caption: "Slide 9"
   }
 ];
 
@@ -56,6 +58,28 @@ const variant = {
 };
 
 const Slideshow = () => {
+  const [slideWidth, setSlideWidth] = useState(400); // Default width for slides
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setSlideWidth(150);
+      } else if (window.innerWidth < 768) { 
+        setSlideWidth(200);
+      } else if (window.innerWidth < 1024) {
+        setSlideWidth(200);
+      } else if (window.innerWidth < 1280) {
+        setSlideWidth(250);
+      } else {
+        setSlideWidth(350);
+      }
+    };
+
+    handleResize(); 
+    window.addEventListener('resize', handleResize); 
+    return () => window.removeEventListener('resize', handleResize); 
+  }, []);
+
   return (
     <div>
       <motion.h2
@@ -83,6 +107,7 @@ const Slideshow = () => {
       />
       <motion.h2
         className="block bg-green-500 w-[50%] mx-auto text-black md:text-5xl text-3xl px-1 py-5 text-center rounded-lg"
+
         variants={variant}
         initial="initial"
         whileInView="animate"
@@ -97,30 +122,30 @@ const Slideshow = () => {
       >
         {"<Community Partners />"}
       </motion.h2>
-     
-      <div className="mb-20 mt-20 flex justify-center items-center pt-10 custom-overflow">
-        <div className="w-full">
-          <Slide autoplay={true} slidesToShow={5} slidesToScroll={1} infinite={true} duration={10}>
-            {slideImages.map((slide, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center p-2 h-[300px] bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-900 bg-opacity-40 mx-2"
-              >
-                <div className="flex items-center justify-center rounded-2xl overflow-hidden">
-                  <Image
-                    src={slide.url}
-                    alt={slide.caption}
-                    width={300}
-                    height={200}
-                    className="rounded-xl object-cover"
-                  />
-                </div>
+
+
+      <div className="w-full mt-10" >
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-full rounded-lg shadow-lg overflow-hidden ">
+            <Marquee containerClassName="cntr" duration={20}>
+              <div className="flex space-x-3 items-center justify-center">
+                {slideImages.map((slide, index) => (
+                  <div key={index}>
+                    <Image
+                      src={slide.url}
+                      width={slideWidth} 
+                      height={slideWidth}
+                      alt={slide.caption}
+                      className="rounded-lg"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </Slide>
-        </div>
-      </div>
-     
+            </Marquee>
+          </div>
+        </div >
+      </div >
+
     </div>
   );
 };

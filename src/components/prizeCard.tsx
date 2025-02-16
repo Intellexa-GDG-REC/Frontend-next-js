@@ -21,7 +21,7 @@ export function PrizeCard({title, amount, description} :{
         </CardItem>
         <CardItem
           translateZ="100"
-          className="w-full text-center mt-2 text-neutral-300 font-mono  text-[150px] tracking-wide bg-gradient-to-bl from-green-300 to-green-500 bg-clip-text text-transparent p-0"
+          className="w-full text-center mt-2 text-neutral-300 md:text-[300px] text-[180px]  tracking-wide bg-gradient-to-bl from-green-300 to-green-500 bg-clip-text text-transparent p-0 font-outwardBlock"
         >
           {amount}
         </CardItem>
