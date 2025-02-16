@@ -22,7 +22,7 @@ export const Hero = () => {
             window.removeEventListener("mousemove", handleMouseMove);
         };
     }, []);
-    const words = ["Connect", "Create", "New", "Modern"];
+    const words = ["Connect", "Create", "Contribute", "innovate", "have fun"];
     return (
         <div className="flex flex-col justify-center items-center min-h-[100vh]">
             <div className="relative px-52 py-36">
@@ -117,13 +117,13 @@ export const Hero = () => {
                         transition={{ duration: 0.5, ease: "easeInOut", type: "spring", damping: 10, delay: 0.3 }}
                         initial={{ y: -20, opacity: 0 }}
                         className="md:text-8xl text-6xl  font-medium">
-                        <span className="text-green-400">Git</span>RecQuest
+                        Git<span className="text-green-400">REC</span>Quest
                     </motion.h1>
                     <motion.h3
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, ease: "easeInOut", type: "spring", damping: 10, delay: 0.6 }}
                         initial={{ y: -20, opacity: 0 }}
-                        className="text-3xl mt-5">An inter-college GitHub collaboration to build, innovate, and<FlipWords words={words} /> <br /></motion.h3>
+                        className="text-3xl mt-5">An inter-college Open Source contribution contest to build, innovate and<FlipWords words={words} /> <br /></motion.h3>
                     <JoinNow />
                 </div>
             </div>

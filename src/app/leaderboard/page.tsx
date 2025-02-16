@@ -1,7 +1,8 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, RotateCw, Trophy, Medal, Award } from "lucide-react";
+
 
 type LeaderBoardItem = {
   user_id: number;
@@ -35,6 +36,11 @@ const RankBadge = ({ rank }: { rank: number }) => {
     }
   };
 
+  const ref = useRef<HTMLDivElement>(null!);
+  const id = useId();
+
+
+
   return (
     <div className={`flex items-center justify-center w-8 h-8 border rounded-lg ${getBadgeStyle(rank)}`}>
       {getIcon(rank)}
@@ -42,13 +48,16 @@ const RankBadge = ({ rank }: { rank: number }) => {
   );
 };
 
+
+
 export default function Leaderboard() {
   const [data, setData] = useState<LeaderBoardItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const itemsPerPage = 5;
-
+  const [selectedUser, setSelectedUser] = useState<LeaderBoardItem | null>(null);
+  
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -75,6 +84,9 @@ export default function Leaderboard() {
     }
   };
 
+  const handleUserClick = (user: LeaderBoardItem) => {
+    setSelectedUser(user);
+  };
   const leader = () => {
     if (data.length < 3) return null;
 
@@ -92,6 +104,12 @@ export default function Leaderboard() {
       </div>
     ));
   };
+  const closeModal = () => {
+    setSelectedUser(null);
+  };
+  function setActive(arg0: boolean): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] w-screen text-white">
@@ -101,22 +119,19 @@ export default function Leaderboard() {
           <div className="flex justify-center w-full gap-5 mt-10">{leader()}</div>
         </div>
 
-        
         <div className="flex items-center justify-between w-full">
-  
-
-  <div className="flex-grow text-center">
-    <h1 className="text-2xl md:text-5xl font-bold text-white">Leaderboard</h1>
-  </div>
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={fetchData}
-    className="p-2 rounded-xl bg-gray-800 hover:bg-gray-700"
-  >
-    <RotateCw className="w-5 h-5 text-gray-400" />
-  </motion.button>
-</div>
+          <div className="flex-grow text-center">
+            <h1 className="text-2xl md:text-5xl font-bold text-white">Leaderboard</h1>
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={fetchData}
+            className="p-2 rounded-xl bg-gray-800 hover:bg-gray-700"
+          >
+            <RotateCw className="w-5 h-5 text-gray-400" />
+          </motion.button>
+        </div>
 
         <div className="overflow-x-auto mt-6">
           <table className="w-full">
@@ -130,11 +145,24 @@ export default function Leaderboard() {
             </thead>
             <tbody>
               {data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((item, index) => (
-                <motion.tr key={item.user_id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="border-b border-gray-800/50 hover:bg-gray-800/30">
-                  <td className="px-4 py-4"><RankBadge rank={(currentPage - 1) * itemsPerPage + index + 1} /></td>
+                <motion.tr
+                  key={item.user_id}
+                  onClick={() => handleUserClick(item)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="border-b border-gray-800/50 hover:bg-gray-800/30 cursor-pointer"
+                >
+                   <td className="px-4 py-4"><RankBadge rank={index + 1} /></td>
                   <td className="px-4 py-4 flex items-center space-x-3">
-                    <img src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}`} alt={item.github_username} className="w-10 h-10 rounded-xl" />
-                    <a href={item.github_url} target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400">{item.user_name || item.github_username}</a>
+                    <img
+                      src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}`}
+                      alt={item.github_username}
+                      className="w-10 h-10 rounded-xl"
+                    />
+                    <a   className="text-white hover:text-blue-400">
+                      {item.user_name || item.github_username}
+                    </a>
                   </td>
                   <td className="px-4 py-4">{item.pr_count}</td>
                   <td className="px-4 py-4">{item.score}</td>
@@ -150,6 +178,26 @@ export default function Leaderboard() {
           <button disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
         </div>
       </motion.div>
+      {selectedUser && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="bg-gray-900 p-6 rounded-[20px] w-[400px] text-white shadow-lg"
+          >
+            <h2 className="text-xl font-bold mb-2">{selectedUser.user_name || selectedUser.github_username}</h2>
+            <p><strong>GitHub:</strong> <a href={selectedUser.github_url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{selectedUser.github_url}</a></p>
+            <p><strong>PRs:</strong> {selectedUser.pr_count}</p>
+            <p><strong>Score:</strong> {selectedUser.score}</p>
+          
+
+            <button onClick={closeModal} className="mt-4 w-full py-2 bg-red-600 hover:bg-red-700 rounded-[20px]">
+              Close
+            </button>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }
