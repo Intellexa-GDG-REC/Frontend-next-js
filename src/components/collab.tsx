@@ -30,10 +30,10 @@ const slideImages = [
     url: "/collab/img6.jpg",
     caption: "Slide 6"
   },
-  {
+  /* {
     url: "/collab/img7.jpg",
     caption: "Slide 7"
-  },
+  }, */
   {
     url: "/collab/img8.jpg",
 
@@ -98,13 +98,22 @@ const Slideshow = () => {
       >
         {"<Startups />"}
       </motion.h2>
+      <div className="">
       <Image
         alt="loading"
         src={'/collab/kenesis.jpg'}
         className="mx-auto mt-20 m-15 mt-[7%] transition-transform duration-300 hover:scale-[1.1] mb-[7%] rounded-[20px]"
-        width={500}
-        height={500}
-      />
+        width={400}
+        height={400}
+      /> <Image
+      alt="loading"
+      src={'/collab/img7.jpg'}
+      className="mx-auto mt-20 m-15 mt-[7%] transition-transform duration-300 hover:scale-[1.1] mb-[7%] rounded-[20px]"
+      width={200}
+      height={200}
+    />
+      </div>
+      
       <motion.h2
         className="block bg-green-500 w-[50%] mx-auto text-black md:text-5xl text-3xl px-1 py-5 text-center rounded-lg"
 
