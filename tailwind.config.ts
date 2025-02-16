@@ -15,7 +15,9 @@ export default {
   ],
   darkMode: ["class", "class"],
   theme: {
+
     extend: {
+      
       fontFamily: {
         clash: ["Clash Grotesk", "sans-serif"],
         outwardBlock: ["Outward Block", "sans-serif"],

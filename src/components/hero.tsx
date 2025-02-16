@@ -22,6 +22,7 @@ export const Hero = () => {
         };
     }, []);
 
+    const words = ["Connect", "Create", "Contribute", "innovate", "have fun"];
     return (
         <div>
             <div className="flex flex-col justify-center items-center min-h-screen overflow-x-hidden ">

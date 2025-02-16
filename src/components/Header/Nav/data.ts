@@ -1,4 +1,4 @@
-export const links = [
+/* export const links = [
     {
         title: "Home",
         href: "/"
@@ -16,6 +16,17 @@ export const links = [
         href: "/contribute"
     },
    
+]
+ */
+export const links = [
+    {
+        title: "Home",
+        href: "/welcome"
+    },
+    {
+        title: "Form",
+        href: "/form"
+    },
 ]
 
 export const footerLinks = [
