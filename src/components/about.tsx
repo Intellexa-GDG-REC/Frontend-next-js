@@ -78,8 +78,8 @@ export const About = () => {
           >
             <Image
               src="/intellexa_logo.png"
-              width={220}
-              height={220}
+              width={200}
+              height={200}
               alt="Intellexa logo"
               objectFit="contain"
               className="rounded-2xl scale-125"
@@ -105,7 +105,7 @@ export const About = () => {
             transition={{ delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Image src="/wtm.png" width={200} height={200} alt="WTM" className="rounded-2xl" />
+            <Image src="/wtm.png" width={180} height={180} alt="WTM" className="rounded-2xl" />
           </motion.div>
         </div>
       </div>
