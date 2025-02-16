@@ -36,7 +36,9 @@ const slideImages = [
   },
   {
     url: "/collab/img8.jpg",
+
     caption: "Slide 8"
+
   },
   {
     url: "/collab/img9.jpg",
@@ -79,42 +81,33 @@ const Slideshow = () => {
   }, []);
 
   return (
-    <div className="mt-20 md:mt-3 p-4 sm:p-6 md:p-8 lg:p-12 relative">
-      <div className="flex justify-center">
-        <motion.h2
-          className="block bg-green-500 text-black md:text-5xl text-3xl px-6 py-5"
-          variants={variant}
-          initial="initial"
-          whileInView="animate"
-          transition={{
-            duration: 0.5,
-            ease: "easeInOut",
-            type: "spring",
-            damping: 10,
-            delay: 0.3
-          }}
-          viewport={{ once: true }}
-        >
-          {"<Startups />"}
-        </motion.h2>
-      </div>
-
-      <div className="w-full max-w-15xl px-4 mt-10">
-        <Image
-          alt="loading"
-          src={'/collab/kenesis.jpg'}
-          className="mx-auto transition-transform duration-300 hover:scale-105 rounded-2xl"
-          width={300}
-          height={300}
-          style={{
-            maxWidth: '100%',
-            height: 'auto'
-          }}
-        />
-      </div>
-
+    <div>
       <motion.h2
-        className="block bg-green-500 text-black md:text-5xl text-3xl px-6 py-5 mt-20 w-max mx-auto"
+        className="block bg-green-500 w-[20%] sm:w-[35%] mx-auto text-black md:text-5xl text-3xl px-1 py-5 text-center rounded-lg"
+        variants={variant}
+        initial="initial"
+        whileInView="animate"
+        transition={{
+          duration: 0.5,
+          ease: "easeInOut",
+          type: "spring",
+          damping: 10,
+          delay: 0.3
+        }}
+        viewport={{ once: true }}
+      >
+        {"<Startups />"}
+      </motion.h2>
+      <Image
+        alt="loading"
+        src={'/collab/kenesis.jpg'}
+        className="mx-auto mt-20 m-15 mt-[7%] transition-transform duration-300 hover:scale-[1.1] mb-[7%] rounded-[20px]"
+        width={500}
+        height={500}
+      />
+      <motion.h2
+        className="block bg-green-500 w-[50%] mx-auto text-black md:text-5xl text-3xl px-1 py-5 text-center rounded-lg"
+
         variants={variant}
         initial="initial"
         whileInView="animate"
@@ -129,6 +122,7 @@ const Slideshow = () => {
       >
         {"<Community Partners />"}
       </motion.h2>
+
 
       <div className="w-full mt-10" >
         <div className="flex flex-col justify-center items-center">
@@ -151,6 +145,7 @@ const Slideshow = () => {
           </div>
         </div >
       </div >
+
     </div>
   );
 };
