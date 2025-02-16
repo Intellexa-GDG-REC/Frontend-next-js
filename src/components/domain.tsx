@@ -42,7 +42,7 @@ export default function Domain() {
       ];
      
       return (
-        <div className='mt-[5%]'>
+        <div className='mt-20'>
              <div className="flex justify-center">
                            <motion.h2
                                className="block bg-green-500 text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-4 sm:px-6 py-3 sm:py-5 rounded-lg"

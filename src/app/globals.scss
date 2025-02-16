@@ -1,17 +1,14 @@
-@use "tailwindcss/base";
-@use "tailwindcss/components";
-@use "tailwindcss/utilities";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
-/* * {
-  cursor: none; /* Hide default cursor */
-//} 
+
 :root {
   --color-bg2: rgb(10, 10, 10);
-  --color-bg1: rgb(0, 204, 75);
+  --color-bg1: rgb(21, 128, 61);
   --color1: 10, 10, 10;
   --color2: 10, 10, 10;
   --color3: 10, 10, 10;
