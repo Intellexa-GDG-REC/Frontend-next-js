@@ -11,6 +11,7 @@ type LeaderBoardItem = {
   github_url: string;
   pr_count: number;
   score: number;
+  github_img_url:string;
 };
 
 const getScale = (index: number) => {
@@ -67,6 +68,7 @@ export default function Leaderboard() {
         setData(responseData);
         setTotalPages(Math.ceil(responseData.length / itemsPerPage) || 1);
       }
+      console.log("Leaderboard data fetched:", responseData);
     } catch (error) {
       console.error("Failed to fetch leaderboard data:", error);
     } finally {
@@ -95,7 +97,7 @@ export default function Leaderboard() {
       <div key={item.user_id} className={`w-full hover:bg-indigo-500 hover:shadow-lg p-6 shadow-xl rounded-[10px] bg-gradient-to-r from-blue-500 to-purple-600 ${getScale(index)}`}>
         <div className="flex flex-col items-center text-white">
           <img
-            src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}&font=montserrat`}
+            src={item.github_img_url}
             alt={item.github_username}
             className="w-32 h-32 rounded-full object-cover border-4 border-white"
           />
@@ -156,7 +158,7 @@ export default function Leaderboard() {
                    <td className="px-4 py-4"><RankBadge rank={index + 1} /></td>
                   <td className="px-4 py-4 flex items-center space-x-3">
                     <img
-                      src={`https://placehold.co/100x100/purple/white?text=${item.github_username.charAt(0).toUpperCase()}`}
+                      src={item.github_img_url}
                       alt={item.github_username}
                       className="w-10 h-10 rounded-xl"
                     />
@@ -165,7 +167,7 @@ export default function Leaderboard() {
                     </a>
                   </td>
                   <td className="px-4 py-4">{item.pr_count}</td>
-                  <td className="px-4 py-4">{item.score}</td>
+                  <td className="px-4 py-4">{item.score==null?0:item.score}</td>
                 </motion.tr>
               ))}
             </tbody>
