@@ -59,7 +59,7 @@ export default function Countdown() {
                     onEnded={handleVideoEnd}
                 />
             )}
- <div className="flex flex-wrap justify-center items-center gap-4">
+{/*  <div className="flex  justify-center items-center gap-4">
             
             <Image
                     alt="loading"
@@ -90,7 +90,7 @@ export default function Countdown() {
                     height={400}
                   />
             </div>
-           
+            */}
             {/* Timer Overlay */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
