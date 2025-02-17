@@ -24,27 +24,21 @@ const geistSans = Geist({
     description: "Inter-College, Open-Source Contribution Contest",
   };
 export default function Home() {
-    return (
-        <div className={`${geistSans.variable} ${geistMono.variable} antialiased font-clash bg-[#0a0a0a] flex justify-center`}>
-  <div className="max-w-screen-2xl overflow-x-hidden text-white relative ">
-            <Gradient />
-            <section className="bg-grid-white/5 border-white relative mb-40">
-                <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-[#0a0a0a] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-          {/*   <Navbar2 />  */}
-              <Hero />  
-            </section>
-          <About />         
-              <Domain/> 
-           <Timeline />
-          <Prize /> 
-        
-           <Collab/>  
-           
-          
-            <Footer /> 
-        </div>
-        </div>
-      
-    );
+  return (
+    <div className={`${geistSans.variable} ${geistMono.variable} antialiased font-clash bg-[#0a0a0a] flex justify-center`}>
+      <div className="w-screen overflow-x-hidden text-white relative ">
+        <Gradient />
+        <section className="bg-grid-white/5 border-white relative mb-40 ">
+          <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-[#0a0a0a] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+          <Hero />
+        </section>
+        <About />
+        <Domain />
+        <Timeline />
+        <Prize />
+        <Collab />
+        <Footer />
+      </div>
+    </div>
 
 }
