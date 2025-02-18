@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function Countdown() {
     const calculateTimeLeft = () => {
        // const targetDate = new Date("2025-02-22T19:00:00"); // Set date and time to 7 PM
-        const targetDate = new Date("2025-02-17T22:26:00");
+        const targetDate = new Date("2025-02-22T19:00:00");
 const difference = +targetDate - +new Date(); 
         return {
             days: Math.floor(difference / (1000 * 60 * 60 * 24)),
