@@ -24,7 +24,7 @@ export const links = [
         href: "/welcome"
     },
     {
-        title: "Form",
+        title: "Register Now",
         href: "/form"
     },
 ]
